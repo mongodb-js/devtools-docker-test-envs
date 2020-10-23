@@ -7,11 +7,32 @@ DevTools Team docker images and environments for testing.
 
 <!-- toc -->
 
-  * [Requirements](#requirements)
-  * [Available setups](#available-setups)
-    + [Standalone without authentication](#standalone-without-authentication)
-      - [How to connect](#how-to-connect)
-- [with enterprise shell:](#with-enterprise-shell)
+- [Requirements](#requirements)
+- [Available setups](#available-setups)
+  * [Standalone without authentication](#standalone-without-authentication)
+    + [How to connect](#how-to-connect)
+  * [Kerberos / GSSAPI](#kerberos--gssapi)
+    + [How to connect](#how-to-connect-1)
+  * [ReplicaSet](#replicaset)
+    + [How to connect](#how-to-connect-2)
+  * [Username / Password (SCRAM)](#username--password-scram)
+    + [How to connect](#how-to-connect-3)
+    + [Users](#users)
+  * [Sharded cluster](#sharded-cluster)
+    + [How to connect](#how-to-connect-4)
+  * [SSH Tunnel](#ssh-tunnel)
+    + [How to connect](#how-to-connect-5)
+      - [SSH tunnel with password](#ssh-tunnel-with-password)
+      - [SSH tunnel with identity key (no passphrase)](#ssh-tunnel-with-identity-key-no-passphrase)
+      - [SSH tunnel with identity key (with passphrase)](#ssh-tunnel-with-identity-key-with-passphrase)
+    + [Regenerating identity keys](#regenerating-identity-keys)
+  * [TLS](#tls)
+    + [How to connect](#how-to-connect-6)
+      - [Unvalidated](#unvalidated)
+      - [Server validation](#server-validation)
+      - [Server and client validation](#server-and-client-validation)
+      - [x509](#x509)
+    + [Regenerating certificates](#regenerating-certificates)
 
 <!-- tocstop -->
 
@@ -21,6 +42,7 @@ DevTools Team docker images and environments for testing.
 - access to `/etc/hosts` (required for some of the setups)
 
 ## Available setups
+
 ### Standalone without authentication
 
 ```
@@ -33,7 +55,9 @@ docker-compose -f basic/docker-compose.yaml up
 mongo \
   --host localhost \
   --port 27020
-```### Kerberos / GSSAPI
+```
+
+### Kerberos / GSSAPI
 
 ```
 docker-compose -f kerberos/docker-compose.yaml up
@@ -62,6 +86,7 @@ mongo \
   --authenticationMechanism GSSAPI \
   -u mongodb.user@EXAMPLE.COM
 ```
+
 ### ReplicaSet
 
 ```
@@ -81,6 +106,7 @@ Connection string:
 ```
 mongodb://root:password123@mongodb-rs-1:28001,mongodb-rs-2:28002,mongodb-rs-3:28003/db1?authSource=admin&replicaSet=replicaset
 ```
+
 ### Username / Password (SCRAM)
 
 ```
@@ -109,6 +135,7 @@ mongo \
 - `authDb`: user with a different authentication database (`authDb`).
 
 See `scram/initdb/init.js` for details.
+
 ### Sharded cluster
 
 ```
@@ -124,6 +151,7 @@ mongo --username root \
   --authenticationDatabase admin \
   --port 28004
 ```
+
 ### SSH Tunnel
 
 ```
@@ -173,6 +201,7 @@ SSH Passphrase: "passphrase"
 #### Regenerating identity keys
 
 Run `bash ./recreate-keys.sh` to re-generate the identity keys if needed.
+
 ### TLS
 
 ```
@@ -230,3 +259,4 @@ tlsCAFile=tls/ca.pem
 #### Regenerating certificates
 
 Run `bash ./recreate-pem.sh` to re-generate the certificates if needed.
+
