@@ -38,7 +38,7 @@ db.createUser( // readWriteAnyDatabase only SCRAM-SHA-256
 
 db.createUser(
   {
-    user: 'user3',
+    user: 'user2',
     pwd: 'password',
     roles: [
       { role: 'read', db: 'db1' },

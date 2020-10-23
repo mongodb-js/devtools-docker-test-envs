@@ -6,4 +6,3 @@ services:
     build: "."
     ports:
       - "22222:22"
-    restart: unless-stopped

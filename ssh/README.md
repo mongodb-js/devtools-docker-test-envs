@@ -1,8 +1,12 @@
+### SSH Tunnel
+
 ```
-docker-compose up
+docker-compose -f ssh/docker-compose.yaml up
 ```
 
-1. Connection to ssh tunnel with password:
+#### How to connect
+
+##### SSH tunnel with password
 
 ```
 Hostname: mongo
@@ -14,7 +18,7 @@ SSH Username: root
 SSH Password: password
 ```
 
-2. Connection to ssh tunnel with key (no passphrase):
+##### SSH tunnel with identity key (no passphrase)
 
 ```
 Hostname: mongo
@@ -27,7 +31,7 @@ SSH Identity File: "keys/key-without-passphrase"
 SSH Passphrase: ""
 ```
 
-3. Connection to ssh tunnel with key (with passphrase):
+##### SSH tunnel with identity key (with passphrase)
 
 ```
 Hostname: mongo
@@ -39,3 +43,7 @@ SSH Username: root
 SSH Identity File: "keys/key-with-passphrase"
 SSH Passphrase: "passphrase"
 ```
+
+#### Regenerating identity keys
+
+Run `bash ./recreate-keys.sh` to re-generate the identity keys if needed.

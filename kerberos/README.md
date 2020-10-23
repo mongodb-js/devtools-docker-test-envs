@@ -1,11 +1,15 @@
+### Kerberos / GSSAPI
+
+```
+docker-compose -f kerberos/docker-compose.yaml up
+```
+
+#### How to connect
+
 Make sure you have this line in your `/etc/hosts`.
 
 ```
 127.0.0.1 mongodb-enterprise.example.com
-```
-
-```
-docker-compose up
 ```
 
 Authenticate with kdc (the password is `password`):

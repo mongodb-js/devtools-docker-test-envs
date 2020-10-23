@@ -2,7 +2,7 @@ version: '2'
 
 services:
   "mongodb-rs-1":
-    image: "docker.io/bitnami/mongodb:4.4"
+    image: "docker.io/bitnami/mongodb"
     environment:
       MONGODB_ADVERTISED_HOSTNAME: "mongodb-rs-1"
       MONGODB_REPLICA_SET_MODE: "primary"
@@ -13,7 +13,7 @@ services:
       - "28001:28001"
 
   "mongodb-rs-2":
-    image: "docker.io/bitnami/mongodb:4.4"
+    image: "docker.io/bitnami/mongodb"
     environment:
       MONGODB_ADVERTISED_HOSTNAME: "mongodb-rs-2"
       MONGODB_REPLICA_SET_MODE: "secondary"
@@ -26,7 +26,7 @@ services:
       - "28002:28002"
 
   "mongodb-rs-3":
-    image: "docker.io/bitnami/mongodb:4.4"
+    image: "docker.io/bitnami/mongodb"
     environment:
       MONGODB_ADVERTISED_HOSTNAME: "mongodb-rs-3"
       MONGODB_REPLICA_SET_MODE: "secondary"
