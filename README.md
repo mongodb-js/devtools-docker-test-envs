@@ -112,8 +112,8 @@ Some of the setups reqiuire entries on the `/etc/hosts` file (or similar in Wind
 #### Fresh tear up / down of environments
 
 In order to make sure we are actually restarting and using the new
-environment for example after changing some settings or pulling from main
-is can be useful to perform stop and start `docker-compose` in a way that
+environment for example after changing some of the settings or pulling from main
+it can be useful to perform stop and start `docker-compose` in a way that
 cleans up old resurces.
 
 This can be done running the following commands:
