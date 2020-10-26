@@ -4,6 +4,10 @@ DevTools Team docker images and environments for testing.
 
 **NOTE: Not for production use: the content of this repo is purely for internal testing and is not supported for any other purpose.**
 
+##### Updating this README
+
+This README is generated from the `README.tmpl.md` and all the `README.md` in the subfolders. Call `bash generate-readme.sh` to update it.
+
 ### TL;DR
 
 Run
@@ -20,9 +24,7 @@ ie.
 docker-compose -f replica-set/docker-compose.yaml
 ```
 
-##### Updating this README
-
-This README is generated from the `README.tmpl.md` and all the `README.md` in the subfolders. Call `bash generate-readme.sh` to update it.
+### Docs
 
 <!-- toc -->
 
