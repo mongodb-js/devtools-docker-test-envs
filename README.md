@@ -37,7 +37,7 @@ docker-compose -f replica-set/docker-compose.yaml
     + [Fresh tear up / down of environments](#fresh-tear-up--down-of-environments)
     + [Rebuilding images](#rebuilding-images)
 - [Available setups](#available-setups)
-  * [Standalone without authentication](#standalone-without-authentication)
+  * [Standalone community server (no auth)](#standalone-community-server-no-auth)
     + [How to connect](#how-to-connect)
   * [Enterprise server](#enterprise-server)
     + [How to connect](#how-to-connect-1)
@@ -154,10 +154,10 @@ docker-compose -f kerberos/docker-compose.yaml build --no-cache mongodb
 
 ## Available setups
 
-### Standalone without authentication
+### Standalone community server (no auth)
 
 ``` sh
-docker-compose -f basic/docker-compose.yaml up
+docker-compose -f community/docker-compose.yaml up
 ```
 
 #### How to connect
