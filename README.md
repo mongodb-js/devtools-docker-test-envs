@@ -17,7 +17,7 @@ Run
 docker-compose -f <directory>/docker-compose.yaml
 ```
 
-to start the testing environment defined in that directory.
+to start the testing environment in that folder.
 
 ie.
 
