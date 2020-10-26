@@ -59,7 +59,7 @@ Please also refer to the official documentation ([Getting Started](https://docs.
 
 Informations on how to connect are available for each setup.
 
-Some of the setups reqiuire entries on the `/etc/hosts` file (or similar in Windows). That is to simulate specific scenarios with the network (for example kerberos realms).
+Some of the setups reqiuire entries on the `/etc/hosts` file (or similar in Windows). That is necessary to simulate specific scenarios in the network (for example kerberos realms).
 
 ## Troubleshooting
 
