@@ -48,6 +48,7 @@ This README is generated from the `README.tmpl.md` and all the `README.md` in th
       - [Server validation](#server-validation)
       - [Server and client validation](#server-and-client-validation)
       - [x509](#x509)
+      - [TLS with SSH Tunnel](#tls-with-ssh-tunnel)
     + [Regenerating certificates](#regenerating-certificates)
 
 <!-- tocstop -->
@@ -394,6 +395,26 @@ mongodb://localhost:27030
 tlsCertificateKeyFile=tls/client.pem
 tlsCAFile=tls/ca.pem
 ```
+
+##### TLS with SSH Tunnel
+
+Is possible to test TLS over an ssh connection by using a jumphost started on port `22223` and the service name and target port configured in `docker-compse.yaml` as host and port. For example:
+
+```
+Hostname: mongodb-tls-x509
+Port: 27017
+---
+tlsCertificateKeyFile=tls/client.pem
+tlsCAFile=tls/ca.pem
+---
+SSH Tunnel: Use Password
+SSH Hostname: localhost
+SSH Tunnel Port: 22223
+SSH Username: root
+SSH Password: password
+```
+
+See [SSH Tunnel](#ssh-tunnel) for instructions on connecting with SSH Tunnels.
 
 #### Regenerating certificates
 

@@ -32,3 +32,8 @@ services:
       - "./tls:/etc/mongod/tls:ro"
       - "./initdb-x509:/docker-entrypoint-initdb.d/"
     command: [ "mongod", "--bind_ip_all", "--config", "/etc/mongod.conf" ]
+
+  jumphost:
+    build: "../ssh"
+    ports:
+      - "22223:22"
