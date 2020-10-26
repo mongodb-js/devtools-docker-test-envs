@@ -1,6 +1,6 @@
 ### Kerberos / GSSAPI
 
-```
+``` sh
 docker-compose -f kerberos/docker-compose.yaml up
 ```
 
@@ -14,11 +14,11 @@ Make sure you have this line in your `/etc/hosts`.
 
 Authenticate with kdc (the password is `password`):
 
-```
+``` sh
 kinit --kdc-hostname=localhost mongodb.user@EXAMPLE.COM
 ```
 
-```
+``` sh
 # with enterprise shell:
 mongo \
   --host mongodb-enterprise.EXAMPLE.COM \

@@ -18,7 +18,14 @@ echo "${HEAD}" > Dockerfile
 # Add to the build here:
 #
 echo '
-RUN apt-get update -y && apt-get install libsasl2-modules-gssapi-mit
+#
+# GSSAPI deps
+#
+RUN apt-get update -y
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
+  krb5-user \
+  libsasl2-modules-gssapi-mit \
+  openldap-clients \
+  nss-pam-ldapd
 ' >> Dockerfile
-
 echo "${TAIL}" >> Dockerfile

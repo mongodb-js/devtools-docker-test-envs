@@ -15,25 +15,38 @@ services:
       - "750:750"
       - "749:749" # kadmind
 
-  mongodb-enterprise:
+  mongodb:
+    image: devtools-mongodb-enterprise:4.4
+    build:
+      context: "../enterprise/4.4"
+      args:
+        MONGO_PACKAGE: "mongodb-enterprise"
+        MONGO_REPO: repo.mongodb.com
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+      MONGO_INITDB_DATABASE: admin
+      KRB5_KTNAME: "/etc/krb5-keytabs/mongodb.keytab"
     hostname: mongodb-enterprise.example.com
     depends_on:
       - kdc-kadmin
-    build: ./mongodb-enterprise
-    volumes:
-      - krb5-keytabs:/etc/krb5-keytabs
     ports:
       - "29017:27017"
+    volumes:
+      - krb5-keytabs:/etc/krb5-keytabs:ro
+      - ./etc/krb5.conf:/etc/krb5.conf:ro
+      - ./initdb:/docker-entrypoint-initdb.d/:ro
+    command:
+      - "mongod"
+      - "--setParameter"
+      - "authenticationMechanisms=GSSAPI,SCRAM-SHA-256" # Note SCRAM-SHA-256 is required to create the users
     networks:
       krb5-network:
         aliases:
           - mongodb-enterprise.example.com
-
 networks:
   krb5-network:
 
 volumes:
   krb5-keytabs:
-
-
 

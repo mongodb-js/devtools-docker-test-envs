@@ -20,7 +20,7 @@ services:
       MONGODB_REPLICA_SET_KEY: "replicasetkey123"
       MONGODB_PORT_NUMBER: "28002"
       MONGODB_INITIAL_PRIMARY_HOST: "mongodb-rs-1"
-      MONGODB_INITIAL_PRIMARY_PORT_NUMBER: "28002"
+      MONGODB_INITIAL_PRIMARY_PORT_NUMBER: "28001"
       MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD: "password123"
     ports:
       - "28002:28002"
@@ -33,7 +33,18 @@ services:
       MONGODB_REPLICA_SET_KEY: "replicasetkey123"
       MONGODB_PORT_NUMBER: "28003"
       MONGODB_INITIAL_PRIMARY_HOST: "mongodb-rs-1"
-      MONGODB_INITIAL_PRIMARY_PORT_NUMBER: "28003"
+      MONGODB_INITIAL_PRIMARY_PORT_NUMBER: "28001"
       MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD: "password123"
     ports:
       - "28003:28003"
+
+  "setup":
+    image: mongo
+    depends_on:
+      - mongodb-rs-1
+      - mongodb-rs-2
+      - mongodb-rs-3
+    entrypoint: []
+    command: ["bash", "/setup-tags.sh"]
+    volumes:
+      - ./setup-tags.sh:/setup-tags.sh
