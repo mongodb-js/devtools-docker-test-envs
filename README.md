@@ -100,13 +100,13 @@ docker-compose -f kerberos/docker-compose.yaml build --no-cache mongodb
 
 ### Standalone without authentication
 
-```
+``` sh
 docker-compose -f basic/docker-compose.yaml up
 ```
 
 #### How to connect
 
-```
+``` sh
 mongo \
   --host localhost \
   --port 27020
@@ -115,13 +115,13 @@ mongo \
 
 ### Enterprise server
 
-```
+``` sh
 docker-compose -f enterprise/docker-compose.yaml up
 ```
 
 #### How to connect
 
-```
+``` sh
 mongo \
   --host localhost \
   --port 27020
@@ -165,7 +165,7 @@ the right build arguments.
 
 ### Kerberos / GSSAPI
 
-```
+``` sh
 docker-compose -f kerberos/docker-compose.yaml up
 ```
 
@@ -179,11 +179,11 @@ Make sure you have this line in your `/etc/hosts`.
 
 Authenticate with kdc (the password is `password`):
 
-```
+``` sh
 kinit --kdc-hostname=localhost mongodb.user@EXAMPLE.COM
 ```
 
-```
+``` sh
 # with enterprise shell:
 mongo \
   --host mongodb-enterprise.EXAMPLE.COM \
@@ -195,7 +195,7 @@ mongo \
 
 ### LDAP
 
-```
+``` sh
 docker-compose -f ldap/docker-compose.yaml up
 ```
 
@@ -214,7 +214,7 @@ mongo \
 
 ### ReplicaSet
 
-```
+``` sh
 docker-compose -f replica-set/docker-compose.yaml up
 ```
 
