@@ -64,6 +64,7 @@ This README is generated from the `README.tmpl.md` and all the `README.md` in th
       - [Server and client validation](#server-and-client-validation)
       - [x509](#x509)
       - [TLS with SSH Tunnel](#tls-with-ssh-tunnel)
+    + [Using valid TLS certs](#using-valid-tls-certs)
     + [Regenerating certificates](#regenerating-certificates)
 
 <!-- tocstop -->
@@ -464,6 +465,16 @@ SSH Password: password
 ```
 
 See [SSH Tunnel](#ssh-tunnel) for instructions on connecting with SSH Tunnels.
+
+#### Using valid TLS certs
+
+This setup uses self-signed certificates that can be committed in this repo.
+
+If necessary valid certificates can be obtained from `https://x509gen.corp.mongodb.com`.
+
+The `ca.pem`, `server.pem` and `client.pem` downloaded can be used as replacement for those in the `tls` folder.
+
+Please do not commit those certificates back in the repo.
 
 #### Regenerating certificates
 
