@@ -11,19 +11,13 @@ This README is generated from the `README.tmpl.md` and all the `README.md` in th
 
 ### TL;DR
 
-Run
+1. Start a testing environment defined in a directory by running:
 
-```
-docker-compose -f <directory>/docker-compose.yaml
-```
+  ``` sh
+  docker-compose -f <directory>/docker-compose.yaml
+  ```
 
-to start the testing environment defined in that directory.
-
-ie.
-
-```
-docker-compose -f replica-set/docker-compose.yaml
-```
+2. Connect using the instructions specific for that [testing environment](#available-setups).
 
 ### Docs
 
