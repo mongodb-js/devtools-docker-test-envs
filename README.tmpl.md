@@ -24,7 +24,7 @@ This README is generated from the `README.tmpl.md` and all the `README.md` in th
 
 ## How to test with the environments in this repo
 
-This repository contains a set of `docker` images and [docker-compose](https://docs.docker.com/compose/) configurations to start various setup of the server for testing.
+This repository contains a set of Docker images and [docker-compose](https://docs.docker.com/compose/) configurations to start various setup of the server for testing.
 
 ### Requirements
 
@@ -39,7 +39,7 @@ In order to start the environments you will need:
 
 Each setup has its own folder and `docker-compose.yaml` file.
 
-A `docker-compose.yaml` file describe a set of services that has to be started as docker containers and how that will happen: from which image, what command, environment variables and files to mount from host, how it will be exposed to the network.
+A `docker-compose.yaml` file defines a set of services that will be started as docker containers and how that will happen: from which image, what command, environment variables and files to mount from host, how will be exposed to the network.
 
 To start one setup after a fresh clone is always enough to run `docker-compose up` and start the relative `docker-compose.yaml`.
 
@@ -59,7 +59,7 @@ Please also refer to the official documentation ([Getting Started](https://docs.
 
 Informations on how to connect are available for each setup.
 
-Some of the setups reqiuires entries on the `/etc/hosts` file (or similar in Windows). That is to simulate specific scenarios with the network (for example kerberos realms).
+Some of the setups reqiuire entries on the `/etc/hosts` file (or similar in Windows). That is to simulate specific scenarios with the network (for example kerberos realms).
 
 ## Troubleshooting
 
