@@ -6,7 +6,7 @@ DevTools Team docker images and environments for testing.
 
 ##### Updating this README
 
-This README is generated from the `README.tmpl.md` and all the `README.md` in the subfolders. Call `bash regenerate-readme.sh` to update it.
+This README is generated from the `README.tmpl.md` and all the `README.md` in the subfolders. Call `bash generate-readme.sh` to update it.
 
 <!-- toc -->
 
