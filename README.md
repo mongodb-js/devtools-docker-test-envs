@@ -235,6 +235,11 @@ kinit --kdc-hostname=localhost mongodb.user@EXAMPLE.COM
 ```
 
 ``` sh
+# Connection string
+mongodb://mongodb.user%40EXAMPLE.COM@mongodb-enterprise.example.com:29017/?gssapiServiceName=mongodb&authMechanism=GSSAPI&readPreference=primary&authSource=%24external&appname=MongoDB%20Compass%20Beta&ssl=false&authSource=$external
+```
+
+``` sh
 # with enterprise shell:
 mongo \
   --host mongodb-enterprise.EXAMPLE.COM \
