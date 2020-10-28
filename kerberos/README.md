@@ -6,7 +6,21 @@ docker-compose -f kerberos/docker-compose.yaml up
 
 #### How to connect
 
-Make sure you have this line in your `/etc/hosts`.
+Make sure you have this in `/etc/krb5.conf`:
+
+```
+[libdefaults]
+        default_realm = EXAMPLE.COM
+        dns_canonicalize_hostname = false
+
+[realms]
+        EXAMPLE.COM = {
+                kdc = localhost
+                admin_server = localhost
+        }
+```
+
+Make sure you have this line in your `/etc/hosts`:
 
 ```
 127.0.0.1 mongodb-enterprise.example.com
@@ -15,16 +29,27 @@ Make sure you have this line in your `/etc/hosts`.
 Authenticate with kdc (the password is `password`):
 
 ``` sh
-kinit --kdc-hostname=localhost mongodb.user@EXAMPLE.COM
+kinit mongodb.user@EXAMPLE.COM
 ```
 
-``` sh
-# Connection string
-mongodb://mongodb.user%40EXAMPLE.COM@mongodb-enterprise.example.com:29017/?gssapiServiceName=mongodb&authMechanism=GSSAPI&readPreference=primary&authSource=%24external&appname=MongoDB%20Compass%20Beta&ssl=false&authSource=$external
+##### Compass
+
+``` yaml
+hostname: mongodb-enterprise.example.com
+port: 29017
+principal: mongodb.user@EXAMPLE.COM
+gssapiServiceName: mongodb
 ```
 
+##### Connection string
+
+```
+mongodb://mongodb.user%40EXAMPLE.COM@mongodb-enterprise.example.com:29017/?gssapiServiceName=mongodb&authMechanism=GSSAPI&authSource=%24external
+```
+
+##### Shell (enterprise)
+
 ``` sh
-# with enterprise shell:
 mongo \
   --host mongodb-enterprise.EXAMPLE.COM \
   --port 29017 \

@@ -1,3 +1,7 @@
+#!/usr/bin/env bash
+
+set -e
+
 # Copy the keytab back in the volume
 mv /mongodb.keytab /etc/krb5-keytabs/mongodb.keytab
 
