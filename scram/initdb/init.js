@@ -18,6 +18,14 @@ db.createUser( // readWriteAnyDatabase both SCRAM-SHA-1 and SCRAM-SHA-256
   }
 );
 
+db.createUser(
+  {
+    user: 'randomPassword',
+    pwd: 'C;Ib86n5b8{AnExew[TU%XZy,)E6G!dk',
+    roles: ['readWriteAnyDatabase']
+  }
+)
+
 db.createUser( // readWriteAnyDatabase only SCRAM-SHA-1
   {
     user: 'scramSha1',
