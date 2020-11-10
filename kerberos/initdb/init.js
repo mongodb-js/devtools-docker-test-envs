@@ -6,6 +6,13 @@ db = db.getSiblingDB('$external');
 
 db.createUser(
   {
+    user: "encoded!user@EXAMPLE.COM",
+    roles: [ { role: "readWriteAnyDatabase", db: "admin" } ]
+  }
+)
+
+db.createUser(
+  {
     user: "mongodb.user@EXAMPLE.COM",
     roles: [ { role: "readWriteAnyDatabase", db: "admin" } ]
   }

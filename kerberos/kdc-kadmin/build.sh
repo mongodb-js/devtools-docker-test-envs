@@ -83,6 +83,13 @@ echo ""
 kadmin.local -q "addprinc -pw password mongodb.user@$REALM"
 echo ""
 
+
+echo "Adding encoded!user principal"
+kadmin.local -q "delete_principal -force encoded!user@$REALM"
+echo ""
+kadmin.local -q "addprinc -pw password encoded!user@$REALM"
+echo ""
+
 echo "Adding application/reporting principal"
 kadmin.local -q "delete_principal -force application/reporting@$REALM"
 echo ""
