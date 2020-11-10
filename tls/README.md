@@ -47,7 +47,7 @@ tlsCAFile=tls/ca.pem
 Use these parameters to connect with x509:
 
 ```
-mongodb://localhost:27030
+mongodb://localhost:27031
 tlsCertificateKeyFile=tls/client.pem
 tlsCAFile=tls/ca.pem
 ```
