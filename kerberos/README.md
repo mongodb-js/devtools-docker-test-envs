@@ -8,7 +8,7 @@ docker-compose -f kerberos/docker-compose.yaml up
 
 Make sure you have this in `/etc/krb5.conf`:
 
-```
+``` conf
 [libdefaults]
         default_realm = EXAMPLE.COM
         dns_canonicalize_hostname = false
@@ -22,7 +22,7 @@ Make sure you have this in `/etc/krb5.conf`:
 
 Make sure you have this line in your `/etc/hosts`:
 
-```
+``` conf
 127.0.0.1 mongodb-enterprise.example.com
 ```
 
@@ -31,6 +31,12 @@ Authenticate with kdc (the password is `password`):
 ``` sh
 kinit mongodb.user@EXAMPLE.COM
 ```
+
+##### Available users
+
+- `mongodb.user@EXAMPLE.COM`
+- `encoded!user@EXAMPLE.COM`
+- `application/reporting@EXAMPLE.COM`
 
 ##### Compass
 
@@ -43,7 +49,7 @@ gssapiServiceName: mongodb
 
 ##### Connection string
 
-```
+``` sh
 mongodb://mongodb.user%40EXAMPLE.COM@mongodb-enterprise.example.com:29017/?gssapiServiceName=mongodb&authMechanism=GSSAPI&authSource=%24external
 ```
 
