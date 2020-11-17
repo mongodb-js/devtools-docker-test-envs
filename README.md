@@ -408,7 +408,7 @@ SSH Password: password
 ```
 Hostname: mongo
 Port: 27017
-SSH Tunnel: Use Password
+SSH Tunnel: Use Identity File
 SSH Hostname: localhost
 SSH Tunnel Port: 22222
 SSH Username: root
@@ -421,7 +421,7 @@ SSH Passphrase: ""
 ```
 Hostname: mongo
 Port: 27017
-SSH Tunnel: Use Password
+SSH Tunnel: Use Identity File
 SSH Hostname: localhost
 SSH Tunnel Port: 22222
 SSH Username: root
