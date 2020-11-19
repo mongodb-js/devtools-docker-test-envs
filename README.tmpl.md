@@ -13,7 +13,7 @@ This README is generated from the `README.tmpl.md` and all the `README.md` in th
 1. Start a testing environment defined in a directory by running:
 
   ``` sh
-  docker-compose -f <directory>/docker-compose.yaml
+  docker-compose -f <directory>/docker-compose.yaml up
   ```
 
 2. Connect using the instructions specific for that [testing environment](#available-setups).
@@ -48,7 +48,7 @@ You can either run `docker-compose up` from the subfolder containing the `docker
 For example this will start a sharded cluster:
 
 ``` sh
-docker-compose -f sharded/docker-compose.yaml
+docker-compose -f sharded/docker-compose.yaml up
 ```
 
 **NOTE:** VSCode and other IDEs have extension and support for docker compose, you should be able to start a setup directly from the editor.
