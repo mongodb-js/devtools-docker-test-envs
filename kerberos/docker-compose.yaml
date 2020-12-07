@@ -15,7 +15,7 @@ services:
       - "750:750"
       - "749:749" # kadmind
 
-  mongodb:
+  mongodb1:
     image: devtools-mongodb-enterprise:4.4
     build:
       context: "../enterprise/4.4"
@@ -27,7 +27,7 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: root
       MONGO_INITDB_DATABASE: admin
       KRB5_KTNAME: "/etc/krb5-keytabs/mongodb.keytab"
-    hostname: mongodb-enterprise.example.com
+    hostname: mongodb-kerberos-1.example.com
     depends_on:
       - kdc-kadmin
     ports:
@@ -43,10 +43,56 @@ services:
     networks:
       krb5-network:
         aliases:
-          - mongodb-enterprise.example.com
+          - mongodb-kerberos-1.example.com
+
+  mongodb2:
+    image: devtools-mongodb-enterprise:4.4
+    build:
+      context: "../enterprise/4.4"
+      args:
+        MONGO_PACKAGE: "mongodb-enterprise"
+        MONGO_REPO: repo.mongodb.com
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+      MONGO_INITDB_DATABASE: admin
+      KRB5_KTNAME: "/etc/krb5-keytabs/mongodb.keytab"
+    hostname: mongodb-kerberos-2.example.com
+    depends_on:
+      - kdc-kadmin
+    ports:
+      - "29018:27017"
+    volumes:
+      - krb5-keytabs:/etc/krb5-keytabs:ro
+      - ./etc/krb5.conf:/etc/krb5.conf:ro
+      - ./initdb:/docker-entrypoint-initdb.d/:ro
+    command:
+      - "mongod"
+      - "--setParameter"
+      - "authenticationMechanisms=GSSAPI,SCRAM-SHA-256" # Note SCRAM-SHA-256 is required to create the users
+      - "--setParameter"
+      - "saslServiceName=alternate"
+    networks:
+      krb5-network:
+        aliases:
+          - mongodb-kerberos-2.example.com
+
+  client:
+    image: devtools-mongodb-enterprise:4.4
+    build:
+      context: "../enterprise/4.4"
+      args:
+        MONGO_PACKAGE: "mongodb-enterprise"
+        MONGO_REPO: repo.mongodb.com
+    environment: {}
+    depends_on:
+      - kdc-kadmin
+    command: tail -f /dev/null
+    networks:
+      krb5-network:
+
 networks:
   krb5-network:
 
 volumes:
   krb5-keytabs:
-
