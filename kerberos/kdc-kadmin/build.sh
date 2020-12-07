@@ -83,7 +83,6 @@ echo ""
 kadmin.local -q "addprinc -pw password mongodb.user@$REALM"
 echo ""
 
-
 echo "Adding encoded!user principal"
 kadmin.local -q "delete_principal -force encoded!user@$REALM"
 echo ""
@@ -96,7 +95,11 @@ echo ""
 kadmin.local -q "addprinc -pw password application/reporting@$REALM"
 echo ""
 
-kadmin.local -q "delete_principal -force mongodb/mongodb-enterprise.example.com@$REALM"
-kadmin.local -q "addprinc -randkey mongodb/mongodb-enterprise.example.com@$REALM"
+kadmin.local -q "delete_principal -force mongodb/mongodb-kerberos-1.example.com@$REALM"
+kadmin.local -q "addprinc -randkey mongodb/mongodb-kerberos-1.example.com@$REALM"
 
-kadmin.local -q "ktadd -k /mongodb.keytab mongodb/mongodb-enterprise.example.com@$REALM"
+kadmin.local -q "delete_principal -force alternate/mongodb-kerberos-2.example.com@$REALM"
+kadmin.local -q "addprinc -randkey alternate/mongodb-kerberos-2.example.com@$REALM"
+
+kadmin.local -q "ktadd -k /mongodb.keytab mongodb/mongodb-kerberos-1.example.com@$REALM"
+kadmin.local -q "ktadd -k /mongodb.keytab alternate/mongodb-kerberos-2.example.com@$REALM"
