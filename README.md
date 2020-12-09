@@ -40,6 +40,7 @@ This README is generated from the `README.tmpl.md` and all the `README.md` in th
       - [How to use versions in other environments](#how-to-use-versions-in-other-environments)
   * [Kerberos / GSSAPI](#kerberos--gssapi)
     + [How to connect](#how-to-connect-2)
+      - [Servers](#servers)
       - [Available users](#available-users)
       - [Compass](#compass)
       - [Connection string](#connection-string)
@@ -243,7 +244,7 @@ Make sure you have this in `/etc/krb5.conf`:
 Make sure you have this line in your `/etc/hosts`:
 
 ``` conf
-127.0.0.1 mongodb-enterprise.example.com
+127.0.0.1 mongodb-kerberos-1.example.com mongodb-kerberos-2.example.com
 ```
 
 Authenticate with kdc (the password is `password`):
@@ -251,6 +252,10 @@ Authenticate with kdc (the password is `password`):
 ``` sh
 kinit mongodb.user@EXAMPLE.COM
 ```
+
+##### Servers
+
+Both servers are configured with the same set of users, `mongodb-kerberos-1.example.com` is configured with the default `gssapiServiceName` (`mongodb`), while `mongodb-kerberos-2.example.com` is configured with `gssapiServiceName=alternate`.
 
 ##### Available users
 
@@ -261,7 +266,7 @@ kinit mongodb.user@EXAMPLE.COM
 ##### Compass
 
 ``` yaml
-hostname: mongodb-enterprise.example.com
+hostname: mongodb-kerberos-1.example.com
 port: 29017
 principal: mongodb.user@EXAMPLE.COM
 gssapiServiceName: mongodb
@@ -270,17 +275,31 @@ gssapiServiceName: mongodb
 ##### Connection string
 
 ``` sh
-mongodb://mongodb.user%40EXAMPLE.COM@mongodb-enterprise.example.com:29017/?gssapiServiceName=mongodb&authMechanism=GSSAPI&authSource=%24external
+mongodb://mongodb.user%40EXAMPLE.COM@mongodb-kerberos-1.example.com:29017/?gssapiServiceName=mongodb&authMechanism=GSSAPI&authSource=%24external
+```
+
+``` sh
+mongodb://mongodb.user%40EXAMPLE.COM@mongodb-kerberos-2.example.com:29018/?gssapiServiceName=alternate&authMechanism=GSSAPI&authSource=%24external
 ```
 
 ##### Shell (enterprise)
 
 ``` sh
 mongo \
-  --host mongodb-enterprise.EXAMPLE.COM \
+  --host mongodb-kerberos-1.example.com \
   --port 29017 \
   --authenticationDatabase '$external' \
   --authenticationMechanism GSSAPI \
+  -u mongodb.user@EXAMPLE.COM
+```
+
+``` sh
+mongo \
+  --host mongodb-kerberos-2.example.com \
+  --port 29018 \
+  --authenticationDatabase '$external' \
+  --authenticationMechanism GSSAPI \
+  --gssapiServiceName alternate \
   -u mongodb.user@EXAMPLE.COM
 ```
 
