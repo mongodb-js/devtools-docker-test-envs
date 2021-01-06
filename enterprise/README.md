@@ -10,7 +10,7 @@ docker-compose -f enterprise/docker-compose.yaml up
 ``` sh
 mongo \
   --host localhost \
-  --port 27020
+  --port 27021
 ```
 
 #### Enterprise server images
