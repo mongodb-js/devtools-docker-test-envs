@@ -25,7 +25,6 @@ RUN apt-get update -y
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
   krb5-user \
   libsasl2-modules-gssapi-mit \
-  openldap-clients \
-  nss-pam-ldapd
+  ldap-utils
 ' >> Dockerfile
 echo "${TAIL}" >> Dockerfile

@@ -4,9 +4,9 @@ services:
     build: ./ldap
 
   mongodb:
-    image: devtools-mongodb-enterprise:4.4
+    image: devtools-mongodb-enterprise:${MONGODB_VERSION:-4.4}
     build:
-      context: "../enterprise/4.4"
+      context: "../enterprise/${MONGODB_VERSION:-4.4}"
       args:
         MONGO_PACKAGE: "mongodb-enterprise"
         MONGO_REPO: repo.mongodb.com
