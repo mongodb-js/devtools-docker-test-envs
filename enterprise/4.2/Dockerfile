@@ -49,6 +49,7 @@ RUN set -ex; \
 	wget -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$dpkgArch"; \
 	wget -O /usr/local/bin/gosu.asc "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$dpkgArch.asc"; \
 	export GNUPGHOME="$(mktemp -d)"; \
+	echo "disable-ipv6" >> "${GNUPGHOME}/dirmngr.conf"; \
 	gpg --batch --keyserver hkps://keys.openpgp.org --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4; \
 	gpg --batch --verify /usr/local/bin/gosu.asc /usr/local/bin/gosu; \
 	command -v gpgconf && gpgconf --kill all || :; \
@@ -71,6 +72,7 @@ RUN mkdir /docker-entrypoint-initdb.d
 ENV GPG_KEYS E162F504A20CDF15827F718D4B7C549A058F8B6B
 RUN set -ex; \
 	export GNUPGHOME="$(mktemp -d)"; \
+	echo "disable-ipv6" >> "${GNUPGHOME}/dirmngr.conf"; \
 	for key in $GPG_KEYS; do \
 		gpg --batch --keyserver ha.pool.sks-keyservers.net --recv-keys "$key"; \
 	done; \
