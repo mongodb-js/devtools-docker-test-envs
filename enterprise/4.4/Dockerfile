@@ -74,7 +74,7 @@ RUN set -ex; \
 	export GNUPGHOME="$(mktemp -d)"; \
 	echo "disable-ipv6" >> "${GNUPGHOME}/dirmngr.conf"; \
 	for key in $GPG_KEYS; do \
-		gpg --batch --keyserver ha.pool.sks-keyservers.net --recv-keys "$key"; \
+		gpg --batch --keyserver keys.openpgp.org --recv-keys "$key"; \
 	done; \
 	gpg --batch --export $GPG_KEYS > /etc/apt/trusted.gpg.d/mongodb.gpg; \
 	command -v gpgconf && gpgconf --kill all || :; \
