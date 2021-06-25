@@ -1,4 +1,5 @@
 #!/bin/bash
+KADMIN_PRINCIPAL_FULL=$KADMIN_PRINCIPAL@$REALM
 
 echo "==================================================================================="
 echo "==== Create the principals in the acl ============================================="

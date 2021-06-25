@@ -118,7 +118,7 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: root
       MONGO_INITDB_DATABASE: admin
       KRB5_KTNAME: "/etc/krb5-keytabs/mongodb.keytab"
-    hostname: mongodb-kerberos-3.example2.com
+    hostname: mongodb-kerberos-3.examplewrong.com
     depends_on:
       - kdc-kadmin2
     ports:
@@ -134,7 +134,7 @@ services:
     networks:
       krb5-network:
         aliases:
-          - mongodb-kerberos-3.example2.com
+          - mongodb-kerberos-3.examplewrong.com
 
   client:
     image: devtools-mongodb-enterprise:4.4

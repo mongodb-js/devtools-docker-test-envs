@@ -5,10 +5,10 @@
 Make sure you have this line in your `/etc/hosts`:
 
 ``` conf
-127.0.0.1 mongodb-kerberos-1.example.com mongodb-kerberos-2.example.com mongodb-kerberos-3.example2.com
+127.0.0.1 mongodb-kerberos-1.example.com mongodb-kerberos-2.example.com mongodb-kerberos-3.examplewrong.com
 ```
 
-Make sure you have this in `/etc/krb5.conf`:
+Make sure you have this in `/etc/krb5.conf` (note the `domain_realm` section to configure cross-realm):
 
 ``` conf
 [realms]
@@ -21,6 +21,9 @@ Make sure you have this in `/etc/krb5.conf`:
                 kdc = localhost:89
                 admin_server = localhost:849
         }
+
+[domain_realm]
+        .examplewrong.com = EXAMPLE2.COM
 ```
 
 Start the docker environment:
@@ -55,7 +58,7 @@ All servers are configured with the same set of users.
 
 `mongodb-kerberos-1.example.com` is configured with the default `gssapiServiceName` (`mongodb`), while `mongodb-kerberos-2.example.com` is configured with `gssapiServiceName=alternate`. These two servers are in the Kerberos Realm `EXAMPLE.COM`.
 
-The server `mongodb-kerberos-3.example2.com` has the default `gssapiServiceName` (`mongodb`) but is located in a different Kerberos Realm `EXAMPLE2.COM`.
+The server `mongodb-kerberos-3.examplewrong.com` has the default `gssapiServiceName` (`mongodb`) but is located in a different Kerberos Realm `EXAMPLE2.COM`.
 
 ##### Available users
 
