@@ -1,9 +1,13 @@
-FROM debian:jessie
+FROM debian:bullseye-slim
+
+ARG REALM
+ARG TRUST_PRINCIPAL
+ARG CONFIG_DIR
+ARG TRUST_REALM
 
 EXPOSE 749 88
 
 ENV DEBIAN_FRONTEND noninteractive
-ENV REALM EXAMPLE.COM
 ENV SUPPORTED_ENCRYPTION_TYPES aes256-cts-hmac-sha1-96:normal
 ENV KADMIN_PRINCIPAL kadmin/admin
 ENV KADMIN_PASSWORD MITiys4K5
@@ -16,7 +20,10 @@ RUN apt-get -qq clean
 RUN locale-gen "en_US.UTF-8"
 RUN echo "LC_ALL=\"en_US.UTF-8\"" >> /etc/default/locale
 
-COPY build.sh /tmp/
-RUN /tmp/build.sh
+COPY configure.sh /tmp/
+RUN /tmp/configure.sh
+COPY ${CONFIG_DIR}/add_principals.sh /tmp/
+RUN /tmp/add_principals.sh
+
 COPY init.sh /tmp/
 CMD /tmp/init.sh
