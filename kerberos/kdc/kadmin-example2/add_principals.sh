@@ -1,4 +1,5 @@
 #!/bin/bash
+KADMIN_PRINCIPAL_FULL=$KADMIN_PRINCIPAL@$REALM
 
 echo "==================================================================================="
 echo "==== Create the principals in the acl ============================================="
@@ -17,7 +18,7 @@ if [[ "x${TRUST_PRINCIPAL}" != "x" && "x${TRUST_REALM}" != "x" ]]; then
   echo ""
 fi
 
-kadmin.local -q "delete_principal -force mongodb/mongodb-kerberos-2.example2.com@$REALM"
-kadmin.local -q "addprinc -randkey mongodb/mongodb-kerberos-3.example2.com@$REALM"
+kadmin.local -q "delete_principal -force mongodb/mongodb-kerberos-3.examplewrong.com@$REALM"
+kadmin.local -q "addprinc -randkey mongodb/mongodb-kerberos-3.examplewrong.com@$REALM"
 
-kadmin.local -q "ktadd -k /mongodb.keytab mongodb/mongodb-kerberos-3.example2.com@$REALM"
+kadmin.local -q "ktadd -k /mongodb.keytab mongodb/mongodb-kerberos-3.examplewrong.com@$REALM"
