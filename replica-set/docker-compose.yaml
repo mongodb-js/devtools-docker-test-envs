@@ -48,3 +48,36 @@ services:
     command: ["bash", "/setup-tags.sh"]
     volumes:
       - ./setup-tags.sh:/setup-tags.sh
+
+  "mongodb-rs-private-net-1":
+    image: "docker.io/bitnami/mongodb"
+    environment:
+      MONGODB_ADVERTISED_HOSTNAME: "mongodb-rs-private-net-1"
+      MONGODB_REPLICA_SET_MODE: "primary"
+      MONGODB_ROOT_PASSWORD: "password123"
+      MONGODB_REPLICA_SET_KEY: "replicasetkeyprivate"
+      MONGODB_PORT_NUMBER: "28004"
+    ports:
+      - "28004:28004"
+
+  "mongodb-rs-private-net-2":
+    image: "docker.io/bitnami/mongodb"
+    environment:
+      MONGODB_ADVERTISED_HOSTNAME: "mongodb-rs-private-net-2"
+      MONGODB_REPLICA_SET_MODE: "secondary"
+      MONGODB_REPLICA_SET_KEY: "replicasetkeyprivate"
+      MONGODB_PORT_NUMBER: "28002"
+      MONGODB_INITIAL_PRIMARY_HOST: "mongodb-rs-private-net-1"
+      MONGODB_INITIAL_PRIMARY_PORT_NUMBER: "28004"
+      MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD: "password123"
+
+  "mongodb-rs-private-net-3":
+    image: "docker.io/bitnami/mongodb"
+    environment:
+      MONGODB_ADVERTISED_HOSTNAME: "mongodb-rs-private-net-3"
+      MONGODB_REPLICA_SET_MODE: "secondary"
+      MONGODB_REPLICA_SET_KEY: "replicasetkeyprivate"
+      MONGODB_PORT_NUMBER: "28003"
+      MONGODB_INITIAL_PRIMARY_HOST: "mongodb-rs-private-net-1"
+      MONGODB_INITIAL_PRIMARY_PORT_NUMBER: "28004"
+      MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD: "password123"
