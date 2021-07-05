@@ -14,8 +14,6 @@ services:
       # be enough entropy to generate a new kerberos realm
       - /dev/urandom:/dev/random
       - krb5-keytabs:/etc/krb5-keytabs
-    networks:
-      - krb5-network
     ports:
       - "88:88" # kdc
       - "88:88/udp"
@@ -36,8 +34,6 @@ services:
       # be enough entropy to generate a new kerberos realm
       - /dev/urandom:/dev/random
       - krb5_2-keytabs:/etc/krb5-keytabs
-    networks:
-      - krb5-network
     ports:
       - "89:88" # kdc
       - "89:88/udp"
@@ -69,10 +65,6 @@ services:
       - "mongod"
       - "--setParameter"
       - "authenticationMechanisms=GSSAPI,SCRAM-SHA-256" # Note SCRAM-SHA-256 is required to create the users
-    networks:
-      krb5-network:
-        aliases:
-          - mongodb-kerberos-1.example.com
 
   mongodb2:
     image: devtools-mongodb-enterprise:4.4
@@ -101,10 +93,6 @@ services:
       - "authenticationMechanisms=GSSAPI,SCRAM-SHA-256" # Note SCRAM-SHA-256 is required to create the users
       - "--setParameter"
       - "saslServiceName=alternate"
-    networks:
-      krb5-network:
-        aliases:
-          - mongodb-kerberos-2.example.com
 
   mongodb3:
     image: devtools-mongodb-enterprise:4.4
@@ -131,10 +119,6 @@ services:
       - "mongod"
       - "--setParameter"
       - "authenticationMechanisms=GSSAPI,SCRAM-SHA-256" # Note SCRAM-SHA-256 is required to create the users
-    networks:
-      krb5-network:
-        aliases:
-          - mongodb-kerberos-3.examplewrong.com
 
   client:
     image: devtools-mongodb-enterprise:4.4
@@ -147,11 +131,6 @@ services:
     depends_on:
       - kdc-kadmin
     command: tail -f /dev/null
-    networks:
-      krb5-network:
-
-networks:
-  krb5-network:
 
 volumes:
   krb5-keytabs:
