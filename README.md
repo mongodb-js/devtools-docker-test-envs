@@ -52,19 +52,22 @@ This README is generated from the `README.tmpl.md` and all the `README.md` in th
     + [Replica set composition](#replica-set-composition)
     + [How to connect](#how-to-connect-4)
       - [Using read preference tags](#using-read-preference-tags)
+    + [Direct connection to a private RS node](#direct-connection-to-a-private-rs-node)
   * [Username / Password (SCRAM)](#username--password-scram)
     + [How to connect](#how-to-connect-5)
     + [Users](#users)
   * [Sharded cluster](#sharded-cluster)
     + [How to connect](#how-to-connect-6)
-  * [SSH Tunnel](#ssh-tunnel)
+  * [Srv no ssl](#srv-no-ssl)
     + [How to connect](#how-to-connect-7)
+  * [SSH Tunnel](#ssh-tunnel)
+    + [How to connect](#how-to-connect-8)
       - [SSH tunnel with password](#ssh-tunnel-with-password)
       - [SSH tunnel with identity key (no passphrase)](#ssh-tunnel-with-identity-key-no-passphrase)
       - [SSH tunnel with identity key (with passphrase)](#ssh-tunnel-with-identity-key-with-passphrase)
     + [Regenerating identity keys](#regenerating-identity-keys)
   * [TLS](#tls)
-    + [How to connect](#how-to-connect-8)
+    + [How to connect](#how-to-connect-9)
       - [Unvalidated](#unvalidated)
       - [Server validation](#server-validation)
       - [Server and client validation](#server-and-client-validation)
@@ -222,20 +225,15 @@ the right build arguments.
 
 ### Kerberos / GSSAPI
 
-``` sh
-docker-compose -f kerberos/docker-compose.yaml up
-```
-
 ![](/kerberos/overview.jpg)
 
-#### How to connect
+Make sure you have this line in your `/etc/hosts`:
 
-##### Kerberos Setup
-There are two Kerberos _Key Distribution Centers_ (KDCs) setup: `kdc-admin` and `kdc-admin2`. These two cover the `EXAMPLE.COM` and `EXAMPLE2.COM` realm respectively. All users listed below are registered in the `EXAMPLE.COM` realm. The service principals for `mongodb-kerberos-1` and `mongodb-kerberos-2` are also registered in the `EXAMPLE.COM` realm. The service principal for `mongodb-kerberos-3` is registered in the `EXAMPLE2.COM` realm.
+``` conf
+127.0.0.1 mongodb-kerberos-1.example.com mongodb-kerberos-2.example.com mongodb-kerberos-3.examplewrong.com
+```
 
-The two Kerberos installations have cross-realm authentication enabled so that `kdc-admin2` (realm `EXAMPLE2.COM`) **trusts** `kdc-admin` (realm `EXAMPLE.COM`). For details on how this cross-realm trust is configured refer to [Setting up Cross-Realm Kerberos Trusts](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/system-level_authentication_guide/using_trusts).
-
-Make sure you have this in `/etc/krb5.conf`:
+Make sure you have this in `/etc/krb5.conf` (note the `domain_realm` section to configure cross-realm):
 
 ``` conf
 [realms]
@@ -248,6 +246,15 @@ Make sure you have this in `/etc/krb5.conf`:
                 kdc = localhost:89
                 admin_server = localhost:849
         }
+
+[domain_realm]
+        .examplewrong.com = EXAMPLE2.COM
+```
+
+Start the docker environment:
+
+``` sh
+docker-compose -f kerberos/docker-compose.yaml up
 ```
 
 Authenticate with kdc (the password is `password`):
@@ -256,20 +263,27 @@ Authenticate with kdc (the password is `password`):
 kinit mongodb.user@EXAMPLE.COM
 ```
 
+**Important:** To stop the environment, make sure to use the `-v` flag:
+
+``` sh
+docker-compose -f kerberos/docker-compose.yaml down -v
+```
+
+
+#### How to connect
+
+##### Kerberos Setup
+There are two Kerberos _Key Distribution Centers_ (KDCs) setup: `kdc-admin` and `kdc-admin2`. These two cover the `EXAMPLE.COM` and `EXAMPLE2.COM` realm respectively. All users listed below are registered in the `EXAMPLE.COM` realm. The service principals for `mongodb-kerberos-1` and `mongodb-kerberos-2` are also registered in the `EXAMPLE.COM` realm. The service principal for `mongodb-kerberos-3` is registered in the `EXAMPLE2.COM` realm.
+
+The two Kerberos installations have cross-realm authentication enabled so that `kdc-admin2` (realm `EXAMPLE2.COM`) **trusts** `kdc-admin` (realm `EXAMPLE.COM`). For details on how this cross-realm trust is configured refer to [Setting up Cross-Realm Kerberos Trusts](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/system-level_authentication_guide/using_trusts).
+
 ##### Servers
 
 All servers are configured with the same set of users.
 
 `mongodb-kerberos-1.example.com` is configured with the default `gssapiServiceName` (`mongodb`), while `mongodb-kerberos-2.example.com` is configured with `gssapiServiceName=alternate`. These two servers are in the Kerberos Realm `EXAMPLE.COM`.
 
-The server `mongodb-kerberos-3.example2.com` has the default `gssapiServiceName` (`mongodb`) but is located in a different Kerberos Realm `EXAMPLE2.COM`.
-
-Make sure you have this line in your `/etc/hosts`:
-
-``` conf
-127.0.0.1 mongodb-kerberos-1.example.com mongodb-kerberos-2.example.com mongodb-kerberos-3.example2.com
-```
-
+The server `mongodb-kerberos-3.examplewrong.com` has the default `gssapiServiceName` (`mongodb`) but is located in a different Kerberos Realm `EXAMPLE2.COM`.
 
 ##### Available users
 
@@ -387,6 +401,12 @@ The replica set has a secondary node tagged with `nodeType:ANALYTICS`.
 mongo 'mongodb://root:password123@mongodb-rs-1:28001,mongodb-rs-2:28002,mongodb-rs-3:28003/db1?authSource=admin&replicaSet=replicaset&readPreference=secondary&readPreferenceTags=nodeType:ANALYTICS'
 ```
 
+#### Direct connection to a private RS node
+
+``` sh
+mongo 'mongodb://root:password123@localhost:28004/db1?authSource=admin'
+```
+
 ### Username / Password (SCRAM)
 
 ```
@@ -431,6 +451,42 @@ mongo --username root \
   --host localhost \
   --authenticationDatabase admin \
   --port 28004
+```
+
+
+### Srv no ssl
+
+1. disable the Umbrella roaming client, on mac os it can be done with:
+
+``` sh
+sudo launchctl unload /Library/LaunchDaemons/com.opendns.osx.RoamingClientConfigUpdater.plist
+```
+
+You can re-enable afterwards with:
+
+``` sh
+sudo launchctl load /Library/LaunchDaemons/com.opendns.osx.RoamingClientConfigUpdater.p
+```
+
+2. Start replica set and dnsmasq:
+
+``` sh
+docker-compose -f replica-set/docker-compose.yaml up
+docker-compose -f dsnmasq/docker-compose.yaml up
+```
+
+3. Add an host entry to `/etc/hosts`
+
+``` sh
+127.0.0.1 srv-test.mongodb.dev
+```
+
+4. Set your dns to 127.0.0.1 so it uses dsnmasq.
+
+#### How to connect
+
+``` sh
+mongodb+srv://root:password123@srv-test.mongodb.dev/db1?ssl=false
 ```
 
 ### SSH Tunnel
