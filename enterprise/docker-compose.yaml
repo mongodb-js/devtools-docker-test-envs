@@ -2,9 +2,9 @@ version: '3'
 
 services:
   mongodb:
-    image: devtools-mongodb-enterprise:4.4
+    image: devtools-mongodb-enterprise:${MONGODB_VERSION:-4.4}
     build:
-      context: "4.4"
+      context: "${MONGODB_VERSION:-4.4}"
       args:
         MONGO_PACKAGE: "mongodb-enterprise"
         MONGO_REPO: repo.mongodb.com
