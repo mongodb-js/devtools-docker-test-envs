@@ -17,7 +17,7 @@ sudo launchctl load /Library/LaunchDaemons/com.opendns.osx.RoamingClientConfigUp
 
 ``` sh
 docker-compose -f replica-set/docker-compose.yaml up
-docker-compose -f dsnmasq/docker-compose.yaml up
+docker-compose -f srv-no-ssl/docker-compose.yaml up
 ```
 
 3. Add an host entry to `/etc/hosts`
