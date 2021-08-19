@@ -21,6 +21,13 @@ x509.searchParams.set('tlsCAFile', path.resolve(__dirname, 'tls', 'ca.pem'));
 x509.searchParams.set('tlsCertificateKeyFile', path.resolve(__dirname, 'tls', 'client.pem'));
 x509.searchParams.set('authMechanism', 'MONGODB-X509');
 
+const x509WithSsh = new ConnectionString('mongodb://mongodb-tls-x509:27017');
+x509WithSsh.searchParams.set('tls', 'true');
+x509WithSsh.searchParams.set('tlsAllowInvalidHostnames', 'true');
+x509WithSsh.searchParams.set('tlsCAFile', path.resolve(__dirname, 'tls', 'ca.pem'));
+x509WithSsh.searchParams.set('tlsCertificateKeyFile', path.resolve(__dirname, 'tls', 'client.pem'));
+x509WithSsh.searchParams.set('authMechanism', 'MONGODB-X509');
+
 module.exports = {
   dockerCompose: {
     projectName: path.basename(__dirname),
@@ -44,6 +51,15 @@ module.exports = {
     },
     x509: {
       connectionString: x509.href
+    },
+    x509WithSsh: {
+      connectionString: x509WithSsh.href,
+      sshTunnel: {
+        host: 'localhost',
+        port: 22223,
+        username: 'root',
+        password: 'password'
+      }
     }
   }
 };
