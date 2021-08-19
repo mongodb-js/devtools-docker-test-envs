@@ -18,7 +18,7 @@ if [[ "x${TRUST_PRINCIPAL}" != "x" && "x${TRUST_REALM}" != "x" ]]; then
   echo ""
 fi
 
-kadmin.local -q "delete_principal -force mongodb/mongodb-kerberos-3.examplewrong.com@$REALM"
-kadmin.local -q "addprinc -randkey mongodb/mongodb-kerberos-3.examplewrong.com@$REALM"
+kadmin.local -q "delete_principal -force mongodb/mongodb-kerberos-3.examplecrossrealm.com@$REALM"
+kadmin.local -q "addprinc -randkey mongodb/mongodb-kerberos-3.examplecrossrealm.com@$REALM"
 
-kadmin.local -q "ktadd -k /mongodb.keytab mongodb/mongodb-kerberos-3.examplewrong.com@$REALM"
+kadmin.local -q "ktadd -k /mongodb.keytab mongodb/mongodb-kerberos-3.examplecrossrealm.com@$REALM"

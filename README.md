@@ -39,6 +39,8 @@ In order to start the environments you will need:
 
 ### Usage
 
+#### With docker-compose
+
 Each setup has its own folder and `docker-compose.yaml` file.
 
 A `docker-compose.yaml` file defines a set of services that will be started as docker containers and how that will happen: from which image, what command, environment variables and files to mount from host, how will be exposed to the network.
@@ -56,6 +58,33 @@ docker-compose -f sharded/docker-compose.yaml up
 **NOTE:** VSCode and other IDEs have extension and support for docker compose, you should be able to start a setup directly from the editor.
 
 Please also refer to the official documentation ([Getting Started](https://docs.docker.com/compose/gettingstarted/), [Cli Reference](https://docs.docker.com/compose/reference/), [YAML Reference](https://docs.docker.com/compose/compose-file/)) and the many other resources online for details on how to use `docker-compose`.
+
+#### Programmatically
+
+``` js
+const createTestEnvironments = require('@mongodb-js/devtools-docker-test-envs');
+
+const {
+  community: communityTestEnv
+} = createTestEnvironments();
+
+before(async() => {
+  await Promise.all([
+    communityTestEnv.start()
+  ]
+});
+
+it('can connect', () => {
+  const { connectionString } = communityTestEnv.getConnectionOptions('community');
+  await MongoClient.connect(connectionString);
+});
+
+after(async() => {
+  await Promise.all([
+    communityTestEnv.stop()
+  ]
+});
+```
 
 #### How to connect to the environments
 
