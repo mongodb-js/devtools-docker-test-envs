@@ -187,3 +187,8 @@ $RECYCLE.BIN/
 node_modules
 
 lib
+
+**/*.d.ts
+**/*.js
+**/*.js.map
+!**/initdb/*.js

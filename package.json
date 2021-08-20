@@ -11,7 +11,8 @@
     "clean": "rimraf lib",
     "precompile": "npm run clean",
     "compile": "npm run compile-ts",
-    "compile-ts": "tsc -p tsconfig.json"
+    "compile-ts": "tsc -p tsconfig.json",
+    "prepare": "npm run compile"
   },
   "repository": {
     "type": "git",
