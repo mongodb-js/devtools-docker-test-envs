@@ -8,7 +8,7 @@
     "lint": "eslint .",
     "depcheck": "depcheck .",
     "check": "npm run lint && npm run depcheck",
-    "clean": "rimraf lib",
+    "clean": "git clean --force -X --exclude node_modules",
     "precompile": "npm run clean",
     "compile": "npm run compile-ts",
     "compile-ts": "tsc -p tsconfig.json",
