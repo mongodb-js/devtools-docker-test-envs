@@ -185,3 +185,5 @@ $RECYCLE.BIN/
 # End of https://www.toptal.com/developers/gitignore/api/osx,windows,vscode,webstorm,linux
 
 node_modules
+
+lib

@@ -2,12 +2,16 @@
   "name": "@mongodb-js/devtools-docker-test-envs",
   "version": "1.0.0",
   "description": "DevTools Team docker images and environments for testing",
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "test": "mocha --timeout 60000 src/**/*.spec.js",
+    "test": "mocha --timeout 60000 -r ts-node/register src/**/*.spec.ts",
     "lint": "eslint .",
     "depcheck": "depcheck .",
-    "check": "npm run lint && npm run depcheck"
+    "check": "npm run lint && npm run depcheck",
+    "clean": "rimraf lib",
+    "precompile": "npm run clean",
+    "compile": "npm run compile-ts",
+    "compile-ts": "tsc -p tsconfig.json"
   },
   "repository": {
     "type": "git",
@@ -20,7 +24,11 @@
   "devDependencies": {
     "depcheck": "^1.4.2",
     "eslint": "^7.32.0",
-    "mocha": "^9.0.3"
+    "gen-esm-wrapper": "^1.1.2",
+    "mocha": "^9.0.3",
+    "rimraf": "^3.0.2",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.3.5"
   },
   "dependencies": {
     "debug": "^4.3.1",
