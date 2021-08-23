@@ -26,10 +26,10 @@ export default class TestEnvironments {
   }
 
   async setup() {
-    Promise.all(Object.values(this._envs).map((env) => env.start()));
+    await Promise.all(Object.values(this._envs).map((env) => env.start()));
   }
 
   async teardown() {
-    Promise.all(Object.values(this._envs).map((env) => env.stop()));
+    await Promise.all(Object.values(this._envs).map((env) => env.stop()));
   }
 }
