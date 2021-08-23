@@ -20,50 +20,50 @@ export default {
   },
   waitOn: ["tcp:28006"],
   connections: {
-    readWriteAnyDatabase: {
+    scramReadWriteAnyDatabase: {
       connectionString: buildConnectionString("user1:password", "admin"),
     },
-    readWriteAnyDatabaseScramSha1: {
+    scramReadWriteAnyDatabaseScramSha1: {
       connectionString: buildConnectionString(
         "user1:password",
         "admin",
         "SCRAM-SHA-1"
       ),
     },
-    readWriteAnyDatabaseScramSha256: {
+    scramReadWriteAnyDatabaseScramSha256: {
       connectionString: buildConnectionString(
         "user1:password",
         "admin",
         "SCRAM-SHA-256"
       ),
     },
-    onlyScramSha1: {
+    scramOnlyScramSha1: {
       connectionString: buildConnectionString(
         "scramSha1:password",
         "admin",
         "SCRAM-SHA-1"
       ),
     },
-    onlyScramSha256: {
+    scramOnlyScramSha256: {
       connectionString: buildConnectionString(
         "scramSha256:password",
         "admin",
         "SCRAM-SHA-256"
       ),
     },
-    encodedPassword: {
+    scramEncodedPassword: {
       connectionString: buildConnectionString(
         "randomPassword:C;Ib86n5b8{AnExew[TU%XZy,)E6G!dk",
         "admin"
       ),
     },
-    privilegesOnNonExistingDatabases: {
+    scramPrivilegesOnNonExistingDatabases: {
       connectionString: buildConnectionString("user2:password", "admin"),
     },
-    privilegesOnNonExistingCollections: {
+    scramPrivilegesOnNonExistingCollections: {
       connectionString: buildConnectionString("customRole:password", "admin"),
     },
-    alternateAuthDb: {
+    scramAlternateAuthDb: {
       connectionString: buildConnectionString("authDb:password", "authDb"),
     },
   },

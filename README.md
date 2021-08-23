@@ -64,25 +64,23 @@ Please also refer to the official documentation ([Getting Started](https://docs.
 ``` js
 const createTestEnvironments = require('@mongodb-js/devtools-docker-test-envs');
 
-const {
-  community: communityTestEnv
-} = createTestEnvironments();
+const testEnvironments = createTestEnvironments([
+  '...',
+  'sharded',
+  '...'
+]);
 
 before(async() => {
-  await Promise.all([
-    communityTestEnv.start()
-  ]
+  await testEnvironments.start();
 });
 
-it('can connect', () => {
-  const { connectionString } = communityTestEnv.getConnectionOptions('community');
+it('can connect to sharded cluster', () => {
+  const { connectionString } = testEnvironments.getConnectionOptions('sharded');
   await MongoClient.connect(connectionString);
 });
 
 after(async() => {
-  await Promise.all([
-    communityTestEnv.stop()
-  ]
+  await testEnvironments.stop();
 });
 ```
 
@@ -130,4 +128,3 @@ To force a rebuild of an image for a service in `docker-compose` we need to run 
 ```
 docker-compose -f kerberos/docker-compose.yaml build --no-cache mongodb
 ```
-

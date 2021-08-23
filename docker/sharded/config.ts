@@ -7,7 +7,7 @@ export default {
   },
   waitOn: ["tcp:28004"],
   connections: {
-    default: {
+    sharded: {
       connectionString:
         "mongodb://root:password123@localhost:28004/db1?authSource=admin",
     },

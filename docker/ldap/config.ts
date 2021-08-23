@@ -14,7 +14,7 @@ export default {
   },
   waitOn: ["tcp:30017"],
   connections: {
-    default: {
+    ldap: {
       connectionString: connectionString.href,
     },
   },

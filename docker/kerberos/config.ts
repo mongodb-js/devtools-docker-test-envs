@@ -53,13 +53,13 @@ export default {
     }
   },
   connections: {
-    default: {
+    kerberos: {
       connectionString: simple.href,
     },
-    alternate: {
+    kerberosAlternate: {
       connectionString: alternate.href,
     },
-    crossRealm: {
+    kerberosCrossRealm: {
       connectionString: crossRealm.href,
     },
   },

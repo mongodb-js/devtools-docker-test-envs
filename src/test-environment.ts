@@ -1,7 +1,4 @@
-import {
-  TestEnvironmentConfiguration,
-  ConnectionOptions,
-} from "./test-environment-configuration";
+import { TestEnvironmentConfiguration } from "./test-environment-configuration";
 
 const uuid = require("uuid");
 const execa = require("execa");
@@ -87,15 +84,5 @@ export default class TestEnvironment {
       [...this._dockerComposeArgs, "down", "-v", "--remove-orphans"],
       { cwd: this._dockerComposeCwd }
     );
-  }
-
-  getConnectionOptions(id: string): ConnectionOptions {
-    const connectionOptions = this.config.connections[id];
-
-    if (!connectionOptions) {
-      throw new Error(`Missing connection options with id ${id}`);
-    }
-
-    return connectionOptions;
   }
 }

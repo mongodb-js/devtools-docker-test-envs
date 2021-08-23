@@ -55,19 +55,19 @@ export default {
   },
   waitOn: ["tcp:27029", "tcp:27030", "tcp:27031", "tcp:22223"],
   connections: {
-    unvalidated: {
+    tlsUnvalidated: {
       connectionString: unvalidated.href,
     },
-    serverValidation: {
+    tlsServerValidation: {
       connectionString: serverValidation.href,
     },
-    serverAndClientValidation: {
+    tlsServerAndClientValidation: {
       connectionString: serverAndClientValidation.href,
     },
-    x509: {
+    tlsX509: {
       connectionString: x509.href,
     },
-    x509WithSsh: {
+    tlsX509WithSsh: {
       connectionString: x509WithSsh.href,
       sshTunnel: {
         host: "localhost",

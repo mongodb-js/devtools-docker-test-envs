@@ -7,7 +7,7 @@ export default {
   },
   waitOn: ["tcp:28006"],
   connections: {
-    password: {
+    sshPassword: {
       connectionString: "mongodb://mongo:27017",
       sshTunnel: {
         host: "localhost",
@@ -16,7 +16,7 @@ export default {
         password: "password",
       },
     },
-    identityKey: {
+    sshIdentityKey: {
       connectionString: "mongodb://mongo:27017",
       sshTunnel: {
         host: "localhost",
@@ -29,7 +29,7 @@ export default {
         ),
       },
     },
-    identityKeyWithPassphrase: {
+    sshIdentityKeyWithPassphrase: {
       connectionString: "mongodb://mongo:27017",
       sshTunnel: {
         host: "localhost",

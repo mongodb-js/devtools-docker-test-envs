@@ -28,15 +28,4 @@ describe("TestEnvironment", function () {
       }
     });
   });
-
-  describe("getConnectionOptions", function () {
-    it("returns connection options for one connection", function () {
-      assert.deepStrictEqual(
-        testEnvironment.getConnectionOptions("community"),
-        {
-          connectionString: "mongodb://localhost:27099/test",
-        }
-      );
-    });
-  });
 });
