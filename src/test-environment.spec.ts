@@ -5,7 +5,7 @@ import TestEnvironment from './test-environment';
 import config from './fixtures/config';
 
 describe('TestEnvironment', function () {
-  let testEnvironment;
+  let testEnvironment: TestEnvironment;
 
   beforeEach(function () {
     testEnvironment = new TestEnvironment(config);

@@ -1,6 +1,6 @@
 import { TestEnvironmentConfiguration } from './test-environment-configuration';
 
-import uuid from 'uuid';
+import { v4 as uuid } from 'uuid';
 import execa from 'execa';
 import waitOn from 'wait-on';
 import hostile from 'hostile';
@@ -21,7 +21,7 @@ export default class TestEnvironment {
     const dockerComposeYaml = config.dockerCompose.yamlPath;
     const dockerComposeProjectName = `${
       config.dockerCompose.projectName
-    }-${uuid.v4()}`;
+    }-${uuid()}`;
 
     this._dockerComposeArgs = [
       '-p',
