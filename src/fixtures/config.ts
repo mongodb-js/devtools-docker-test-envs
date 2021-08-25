@@ -1,14 +1,14 @@
-const path = require("path");
+import path from 'path';
 
 export default {
   dockerCompose: {
-    projectName: "community",
-    yamlPath: path.resolve(__dirname, "docker-compose.yaml"),
+    projectName: 'community',
+    yamlPath: path.resolve(__dirname, 'docker-compose.yaml'),
   },
-  waitOn: ["tcp:27099"],
+  waitOn: ['tcp:27099'],
   connections: {
     community: {
-      connectionString: "mongodb://localhost:27099/test",
+      connectionString: 'mongodb://localhost:27099/test',
     },
   },
 };

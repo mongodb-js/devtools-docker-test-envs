@@ -1,4 +1,4 @@
-version: "3"
+version: '3'
 services:
   ldap-server:
     build: ./ldap
@@ -6,9 +6,9 @@ services:
   mongodb:
     image: devtools-mongodb-enterprise:${MONGODB_VERSION:-4.4}
     build:
-      context: "../enterprise/${MONGODB_VERSION:-4.4}"
+      context: '../enterprise/${MONGODB_VERSION:-4.4}'
       args:
-        MONGO_PACKAGE: "mongodb-enterprise"
+        MONGO_PACKAGE: 'mongodb-enterprise'
         MONGO_REPO: repo.mongodb.com
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
@@ -17,11 +17,11 @@ services:
     depends_on:
       - ldap-server
     ports:
-      - "30017:27017"
+      - '30017:27017'
     volumes:
       - ./etc/mongod.conf:/etc/mongod.conf:ro
       - ./initdb:/docker-entrypoint-initdb.d/:ro
     command:
-      - "mongod"
-      - "--config"
-      - "/etc/mongod.conf"
+      - 'mongod'
+      - '--config'
+      - '/etc/mongod.conf'

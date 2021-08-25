@@ -1,5 +1,5 @@
-import TestEnvironment from "./test-environment";
-import { ConnectionOptions } from "./test-environment-configuration";
+import TestEnvironment from './test-environment';
+import { ConnectionOptions } from './test-environment-configuration';
 
 export default class TestEnvironments {
   private _envs: Record<string, TestEnvironment>;
@@ -25,11 +25,11 @@ export default class TestEnvironments {
     return connectionOptions;
   }
 
-  async setup() {
+  async setup(): Promise<void> {
     await Promise.all(Object.values(this._envs).map((env) => env.start()));
   }
 
-  async teardown() {
+  async teardown(): Promise<void> {
     await Promise.all(Object.values(this._envs).map((env) => env.stop()));
   }
 }

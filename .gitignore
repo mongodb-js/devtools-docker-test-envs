@@ -192,4 +192,5 @@ lib
 **/*.js
 **/*.js.map
 !**/initdb/*.js
+!.eslintrc.js
 *.tgz

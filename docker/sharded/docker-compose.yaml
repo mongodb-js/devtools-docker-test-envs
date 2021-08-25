@@ -11,7 +11,7 @@ services:
       - MONGODB_REPLICA_SET_KEY=replicasetkey123
       - MONGODB_ROOT_PASSWORD=password123
     ports:
-      - "28004:27017"
+      - '28004:27017'
 
   mongodb-shard0:
     image: 'docker.io/bitnami/mongodb-sharded'

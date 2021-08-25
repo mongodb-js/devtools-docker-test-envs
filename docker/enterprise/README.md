@@ -1,13 +1,12 @@
-
 ### Enterprise server
 
-``` sh
+```sh
 docker-compose -f enterprise/docker-compose.yaml up
 ```
 
 #### How to connect
 
-``` sh
+```sh
 mongo \
   --host localhost \
   --port 27021
@@ -40,11 +39,11 @@ Additional dependencies for kerberos and LDAP are automatically added in a `RUN`
 Enterprise images can be referenced by other testing environments that requires the enterprise server. It can be done pointing the build context to one of the image directory and setting
 the right build arguments.
 
-``` yaml
-    build:
-      image: devtools-mongodb-enterprise:<VERSION>
-      context: "../enterprise/<VERSION>"
-      args:
-        MONGO_PACKAGE: "mongodb-enterprise"
-        MONGO_REPO: repo.mongodb.com
+```yaml
+build:
+  image: devtools-mongodb-enterprise:<VERSION>
+  context: '../enterprise/<VERSION>'
+  args:
+    MONGO_PACKAGE: 'mongodb-enterprise'
+    MONGO_REPO: repo.mongodb.com
 ```

@@ -1,13 +1,12 @@
-
 ### Standalone community server (no auth)
 
-``` sh
+```sh
 docker-compose -f community/docker-compose.yaml up
 ```
 
 #### How to connect
 
-``` sh
+```sh
 mongo \
   --host localhost \
   --port 27020

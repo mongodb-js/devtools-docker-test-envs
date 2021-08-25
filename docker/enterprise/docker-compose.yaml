@@ -4,9 +4,9 @@ services:
   mongodb:
     image: devtools-mongodb-enterprise:${MONGODB_VERSION:-4.4}
     build:
-      context: "${MONGODB_VERSION:-4.4}"
+      context: '${MONGODB_VERSION:-4.4}'
       args:
-        MONGO_PACKAGE: "mongodb-enterprise"
+        MONGO_PACKAGE: 'mongodb-enterprise'
         MONGO_REPO: repo.mongodb.com
     ports:
-      - "27021:27017"
+      - '27021:27017'

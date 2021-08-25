@@ -1,6 +1,6 @@
 ### ReplicaSet
 
-``` sh
+```sh
 docker-compose -f replica-set/docker-compose.yaml up
 ```
 
@@ -20,7 +20,7 @@ Add this line to your `/etc/host`:
 
 Connection string:
 
-``` sh
+```sh
 mongo 'mongodb://root:password123@mongodb-rs-1:28001,mongodb-rs-2:28002,mongodb-rs-3:28003/db1?authSource=admin&replicaSet=replicaset'
 ```
 
@@ -28,12 +28,12 @@ mongo 'mongodb://root:password123@mongodb-rs-1:28001,mongodb-rs-2:28002,mongodb-
 
 The replica set has a secondary node tagged with `nodeType:ANALYTICS`.
 
-``` sh
+```sh
 mongo 'mongodb://root:password123@mongodb-rs-1:28001,mongodb-rs-2:28002,mongodb-rs-3:28003/db1?authSource=admin&replicaSet=replicaset&readPreference=secondary&readPreferenceTags=nodeType:ANALYTICS'
 ```
 
 #### Direct connection to a private RS node
 
-``` sh
+```sh
 mongo 'mongodb://root:password123@localhost:28004/db1?authSource=admin'
 ```

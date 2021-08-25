@@ -4,13 +4,13 @@
 
 Make sure you have this line in your `/etc/hosts`:
 
-``` conf
+```conf
 127.0.0.1 mongodb-kerberos-1.example.com mongodb-kerberos-2.example.com mongodb-kerberos-3.examplecrossrealm.com
 ```
 
 Make sure you have this in `/etc/krb5.conf` (note the `domain_realm` section to configure cross-realm):
 
-``` conf
+```conf
 [realms]
         EXAMPLE.COM = {
                 kdc = localhost
@@ -28,26 +28,26 @@ Make sure you have this in `/etc/krb5.conf` (note the `domain_realm` section to 
 
 Start the docker environment:
 
-``` sh
+```sh
 docker-compose -f kerberos/docker-compose.yaml up
 ```
 
 Authenticate with kdc (the password is `password`):
 
-``` sh
+```sh
 kinit mongodb.user@EXAMPLE.COM
 ```
 
 **Important:** To stop the environment, make sure to use the `-v` flag:
 
-``` sh
+```sh
 docker-compose -f kerberos/docker-compose.yaml down -v
 ```
-
 
 #### How to connect
 
 ##### Kerberos Setup
+
 There are two Kerberos _Key Distribution Centers_ (KDCs) setup: `kdc-admin` and `kdc-admin2`. These two cover the `EXAMPLE.COM` and `EXAMPLE2.COM` realm respectively. All users listed below are registered in the `EXAMPLE.COM` realm. The service principals for `mongodb-kerberos-1` and `mongodb-kerberos-2` are also registered in the `EXAMPLE.COM` realm. The service principal for `mongodb-kerberos-3` is registered in the `EXAMPLE2.COM` realm.
 
 The two Kerberos installations have cross-realm authentication enabled so that `kdc-admin2` (realm `EXAMPLE2.COM`) **trusts** `kdc-admin` (realm `EXAMPLE.COM`). For details on how this cross-realm trust is configured refer to [Setting up Cross-Realm Kerberos Trusts](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/system-level_authentication_guide/using_trusts).
@@ -68,7 +68,7 @@ The server `mongodb-kerberos-3.examplecrossrealm.com` has the default `gssapiSer
 
 ##### Compass
 
-``` yaml
+```yaml
 hostname: mongodb-kerberos-1.example.com
 port: 29017
 principal: mongodb.user@EXAMPLE.COM
@@ -78,28 +78,32 @@ gssapiServiceName: mongodb
 ##### Connection string
 
 With as few properties as possible (`gssapiServiceName`, `authSource` will be inferred automatically) - does not work in the _old shell_:
-``` sh
+
+```sh
 mongodb://mongodb.user%40EXAMPLE.COM@mongodb-kerberos-1.example.com:29017/?authMechanism=GSSAPI
 ```
 
 With `authSource` for the old shell:
-``` sh
+
+```sh
 mongodb://mongodb.user%40EXAMPLE.COM@mongodb-kerberos-1.example.com:29017/?authMechanism=GSSAPI&authSource=%24external
 ```
 
-With an alternate service name using official `SERVICE_NAME` auth  - does not work in the _old shell_:
-``` sh
+With an alternate service name using official `SERVICE_NAME` auth - does not work in the _old shell_:
+
+```sh
 mongodb://mongodb.user%40EXAMPLE.COM@mongodb-kerberos-2.example.com:29018/?authMechanism=GSSAPI&authMechanismProperties=SERVICE_NAME:alternate
 ```
 
 With an alternate service name for the old shell:
-``` sh
+
+```sh
 mongodb://mongodb.user%40EXAMPLE.COM@mongodb-kerberos-2.example.com:29018/?gssapiServiceName=alternate&authMechanism=GSSAPI&authSource=%24external
 ```
 
 ##### Shell (enterprise)
 
-``` sh
+```sh
 mongo \
   --host mongodb-kerberos-1.example.com \
   --port 29017 \
@@ -108,7 +112,7 @@ mongo \
   -u mongodb.user@EXAMPLE.COM
 ```
 
-``` sh
+```sh
 mongo \
   --host mongodb-kerberos-2.example.com \
   --port 29018 \

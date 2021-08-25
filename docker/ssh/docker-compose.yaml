@@ -1,36 +1,36 @@
-version: "3"
+version: '3'
 services:
   mongo:
     image: mongo
-  "mongodb-rs-ssh-1":
-    image: "docker.io/bitnami/mongodb"
+  'mongodb-rs-ssh-1':
+    image: 'docker.io/bitnami/mongodb'
     environment:
-      MONGODB_ADVERTISED_HOSTNAME: "mongodb-rs-ssh-1"
-      MONGODB_REPLICA_SET_MODE: "primary"
-      MONGODB_ROOT_PASSWORD: "password123"
-      MONGODB_REPLICA_SET_KEY: "replicasetkey123"
-      MONGODB_PORT_NUMBER: "28001"
-  "mongodb-rs-ssh-2":
-    image: "docker.io/bitnami/mongodb"
+      MONGODB_ADVERTISED_HOSTNAME: 'mongodb-rs-ssh-1'
+      MONGODB_REPLICA_SET_MODE: 'primary'
+      MONGODB_ROOT_PASSWORD: 'password123'
+      MONGODB_REPLICA_SET_KEY: 'replicasetkey123'
+      MONGODB_PORT_NUMBER: '28001'
+  'mongodb-rs-ssh-2':
+    image: 'docker.io/bitnami/mongodb'
     environment:
-      MONGODB_ADVERTISED_HOSTNAME: "mongodb-rs-ssh-2"
-      MONGODB_REPLICA_SET_MODE: "secondary"
-      MONGODB_REPLICA_SET_KEY: "replicasetkey123"
-      MONGODB_PORT_NUMBER: "28002"
-      MONGODB_INITIAL_PRIMARY_HOST: "mongodb-rs-ssh-1"
-      MONGODB_INITIAL_PRIMARY_PORT_NUMBER: "28001"
-      MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD: "password123"
-  "mongodb-rs-ssh-3":
-    image: "docker.io/bitnami/mongodb"
+      MONGODB_ADVERTISED_HOSTNAME: 'mongodb-rs-ssh-2'
+      MONGODB_REPLICA_SET_MODE: 'secondary'
+      MONGODB_REPLICA_SET_KEY: 'replicasetkey123'
+      MONGODB_PORT_NUMBER: '28002'
+      MONGODB_INITIAL_PRIMARY_HOST: 'mongodb-rs-ssh-1'
+      MONGODB_INITIAL_PRIMARY_PORT_NUMBER: '28001'
+      MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD: 'password123'
+  'mongodb-rs-ssh-3':
+    image: 'docker.io/bitnami/mongodb'
     environment:
-      MONGODB_ADVERTISED_HOSTNAME: "mongodb-rs-ssh-3"
-      MONGODB_REPLICA_SET_MODE: "secondary"
-      MONGODB_REPLICA_SET_KEY: "replicasetkey123"
-      MONGODB_PORT_NUMBER: "28003"
-      MONGODB_INITIAL_PRIMARY_HOST: "mongodb-rs-ssh-1"
-      MONGODB_INITIAL_PRIMARY_PORT_NUMBER: "28001"
-      MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD: "password123"
+      MONGODB_ADVERTISED_HOSTNAME: 'mongodb-rs-ssh-3'
+      MONGODB_REPLICA_SET_MODE: 'secondary'
+      MONGODB_REPLICA_SET_KEY: 'replicasetkey123'
+      MONGODB_PORT_NUMBER: '28003'
+      MONGODB_INITIAL_PRIMARY_HOST: 'mongodb-rs-ssh-1'
+      MONGODB_INITIAL_PRIMARY_PORT_NUMBER: '28001'
+      MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD: 'password123'
   jumphost:
-    build: "."
+    build: '.'
     ports:
-      - "22222:22"
+      - '22222:22'

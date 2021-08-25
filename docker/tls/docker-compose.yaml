@@ -4,20 +4,20 @@ services:
   mongodb-tls-server:
     image: mongo
     ports:
-      - "27029:27017"
+      - '27029:27017'
     volumes:
-      - "./mongod-server.conf:/etc/mongod.conf:ro"
-      - "./tls:/etc/mongod/tls:ro"
-    command: [ "mongod", "--bind_ip_all", "--config", "/etc/mongod.conf" ]
+      - './mongod-server.conf:/etc/mongod.conf:ro'
+      - './tls:/etc/mongod/tls:ro'
+    command: ['mongod', '--bind_ip_all', '--config', '/etc/mongod.conf']
 
   mongodb-tls-server-client:
     image: mongo
     ports:
-      - "27030:27017"
+      - '27030:27017'
     volumes:
-      - "./mongod-server-client.conf:/etc/mongod.conf:ro"
-      - "./tls:/etc/mongod/tls:ro"
-    command: [ "mongod", "--bind_ip_all", "--config", "/etc/mongod.conf" ]
+      - './mongod-server-client.conf:/etc/mongod.conf:ro'
+      - './tls:/etc/mongod/tls:ro'
+    command: ['mongod', '--bind_ip_all', '--config', '/etc/mongod.conf']
 
   mongodb-tls-x509:
     image: mongo
@@ -26,14 +26,14 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: root
       MONGO_INITDB_DATABASE: admin
     ports:
-      - "27031:27017"
+      - '27031:27017'
     volumes:
-      - "./mongod-x509.conf:/etc/mongod.conf:ro"
-      - "./tls:/etc/mongod/tls:ro"
-      - "./initdb-x509:/docker-entrypoint-initdb.d/"
-    command: [ "mongod", "--bind_ip_all", "--config", "/etc/mongod.conf" ]
+      - './mongod-x509.conf:/etc/mongod.conf:ro'
+      - './tls:/etc/mongod/tls:ro'
+      - './initdb-x509:/docker-entrypoint-initdb.d/'
+    command: ['mongod', '--bind_ip_all', '--config', '/etc/mongod.conf']
 
   jumphost:
-    build: "../ssh"
+    build: '../ssh'
     ports:
-      - "22223:22"
+      - '22223:22'

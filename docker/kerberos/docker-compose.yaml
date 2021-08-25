@@ -1,4 +1,4 @@
-version: "3"
+version: '3'
 services:
   kdc-kadmin:
     image: kdc-kadmin:example
@@ -15,10 +15,10 @@ services:
       - /dev/urandom:/dev/random
       - krb5-keytabs:/etc/krb5-keytabs
     ports:
-      - "88:88" # kdc
-      - "88:88/udp"
-      - "750:750"
-      - "749:749" # kadmind
+      - '88:88' # kdc
+      - '88:88/udp'
+      - '750:750'
+      - '749:749' # kadmind
 
   kdc-kadmin2:
     image: kdc-kadmin:example2
@@ -35,97 +35,97 @@ services:
       - /dev/urandom:/dev/random
       - krb5_2-keytabs:/etc/krb5-keytabs
     ports:
-      - "89:88" # kdc
-      - "89:88/udp"
-      - "850:750"
-      - "849:749" # kadmind
+      - '89:88' # kdc
+      - '89:88/udp'
+      - '850:750'
+      - '849:749' # kadmind
 
   mongodb1:
     image: devtools-mongodb-enterprise:4.4
     build:
-      context: "../enterprise/4.4"
+      context: '../enterprise/4.4'
       args:
-        MONGO_PACKAGE: "mongodb-enterprise"
+        MONGO_PACKAGE: 'mongodb-enterprise'
         MONGO_REPO: repo.mongodb.com
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: root
       MONGO_INITDB_DATABASE: admin
-      KRB5_KTNAME: "/etc/krb5-keytabs/mongodb.keytab"
+      KRB5_KTNAME: '/etc/krb5-keytabs/mongodb.keytab'
     hostname: mongodb-kerberos-1.example.com
     depends_on:
       - kdc-kadmin
     ports:
-      - "29017:27017"
+      - '29017:27017'
     volumes:
       - krb5-keytabs:/etc/krb5-keytabs:ro
       - ./etc/krb5-example.conf:/etc/krb5.conf:ro
       - ./initdb:/docker-entrypoint-initdb.d/:ro
     command:
-      - "mongod"
-      - "--setParameter"
-      - "authenticationMechanisms=GSSAPI,SCRAM-SHA-256" # Note SCRAM-SHA-256 is required to create the users
+      - 'mongod'
+      - '--setParameter'
+      - 'authenticationMechanisms=GSSAPI,SCRAM-SHA-256' # Note SCRAM-SHA-256 is required to create the users
 
   mongodb2:
     image: devtools-mongodb-enterprise:4.4
     build:
-      context: "../enterprise/4.4"
+      context: '../enterprise/4.4'
       args:
-        MONGO_PACKAGE: "mongodb-enterprise"
+        MONGO_PACKAGE: 'mongodb-enterprise'
         MONGO_REPO: repo.mongodb.com
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: root
       MONGO_INITDB_DATABASE: admin
-      KRB5_KTNAME: "/etc/krb5-keytabs/mongodb.keytab"
+      KRB5_KTNAME: '/etc/krb5-keytabs/mongodb.keytab'
     hostname: mongodb-kerberos-2.example.com
     depends_on:
       - kdc-kadmin
     ports:
-      - "29018:27017"
+      - '29018:27017'
     volumes:
       - krb5-keytabs:/etc/krb5-keytabs:ro
       - ./etc/krb5-example.conf:/etc/krb5.conf:ro
       - ./initdb:/docker-entrypoint-initdb.d/:ro
     command:
-      - "mongod"
-      - "--setParameter"
-      - "authenticationMechanisms=GSSAPI,SCRAM-SHA-256" # Note SCRAM-SHA-256 is required to create the users
-      - "--setParameter"
-      - "saslServiceName=alternate"
+      - 'mongod'
+      - '--setParameter'
+      - 'authenticationMechanisms=GSSAPI,SCRAM-SHA-256' # Note SCRAM-SHA-256 is required to create the users
+      - '--setParameter'
+      - 'saslServiceName=alternate'
 
   mongodb3:
     image: devtools-mongodb-enterprise:4.4
     build:
-      context: "../enterprise/4.4"
+      context: '../enterprise/4.4'
       args:
-        MONGO_PACKAGE: "mongodb-enterprise"
+        MONGO_PACKAGE: 'mongodb-enterprise'
         MONGO_REPO: repo.mongodb.com
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: root
       MONGO_INITDB_DATABASE: admin
-      KRB5_KTNAME: "/etc/krb5-keytabs/mongodb.keytab"
+      KRB5_KTNAME: '/etc/krb5-keytabs/mongodb.keytab'
     hostname: mongodb-kerberos-3.examplecrossrealm.com
     depends_on:
       - kdc-kadmin2
     ports:
-      - "29019:27017"
+      - '29019:27017'
     volumes:
       - krb5_2-keytabs:/etc/krb5-keytabs:ro
       - ./etc/krb5-example2.conf:/etc/krb5.conf:ro
       - ./initdb:/docker-entrypoint-initdb.d/:ro
     command:
-      - "mongod"
-      - "--setParameter"
-      - "authenticationMechanisms=GSSAPI,SCRAM-SHA-256" # Note SCRAM-SHA-256 is required to create the users
+      - 'mongod'
+      - '--setParameter'
+      - 'authenticationMechanisms=GSSAPI,SCRAM-SHA-256' # Note SCRAM-SHA-256 is required to create the users
 
   client:
     image: devtools-mongodb-enterprise:4.4
     build:
-      context: "../enterprise/4.4"
+      context: '../enterprise/4.4'
       args:
-        MONGO_PACKAGE: "mongodb-enterprise"
+        MONGO_PACKAGE: 'mongodb-enterprise'
         MONGO_REPO: repo.mongodb.com
     environment: {}
     depends_on:

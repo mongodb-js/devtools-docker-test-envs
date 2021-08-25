@@ -1,11 +1,11 @@
-import { TestEnvironmentConfiguration } from "./test-environment-configuration";
+import { TestEnvironmentConfiguration } from './test-environment-configuration';
 
-const uuid = require("uuid");
-const execa = require("execa");
-const waitOn = require("wait-on");
-const hostile = require("hostile");
-const util = require("util");
-const path = require("path");
+import uuid from 'uuid';
+import execa from 'execa';
+import waitOn from 'wait-on';
+import hostile from 'hostile';
+import util from 'util';
+import path from 'path';
 
 const setHostEntry = util.promisify(hostile.set.bind(hostile));
 const removeHostEntry = util.promisify(hostile.remove.bind(hostile));
@@ -24,31 +24,31 @@ export default class TestEnvironment {
     }-${uuid.v4()}`;
 
     this._dockerComposeArgs = [
-      "-p",
+      '-p',
       dockerComposeProjectName,
-      "-f",
+      '-f',
       path.basename(dockerComposeYaml),
     ];
 
     this._dockerComposeCwd = path.dirname(dockerComposeYaml);
   }
 
-  async start() {
+  async start(): Promise<void> {
     const args = [
       ...this._dockerComposeArgs,
-      "up",
-      "-d",
-      "--force-recreate",
-      "--remove-orphans",
+      'up',
+      '-d',
+      '--force-recreate',
+      '--remove-orphans',
     ];
 
     for (const host of this.config.hosts || []) {
-      await setHostEntry("127.0.0.1", host);
+      await setHostEntry('127.0.0.1', host);
     }
 
-    await execa("docker-compose", args, {
+    await execa('docker-compose', args, {
       cwd: this._dockerComposeCwd,
-      stdio: "inherit",
+      stdio: 'inherit',
     });
 
     await waitOn({
@@ -61,27 +61,27 @@ export default class TestEnvironment {
     }
   }
 
-  async stop() {
+  async stop(): Promise<void> {
     try {
       for (const host of this.config.hosts || []) {
-        await removeHostEntry("127.0.0.1", host);
+        await removeHostEntry('127.0.0.1', host);
       }
     } catch (error) {
       console.error(
-        "failed to remove host entries, skipping. Caused by:",
+        'failed to remove host entries, skipping. Caused by:',
         error
       );
     }
 
     try {
-      await (this.config.teardown || (() => {}))();
+      await (this.config.teardown || (() => Promise.resolve()))();
     } catch (error) {
-      console.error("failed config teardown, skipping. Caused by:", error);
+      console.error('failed config teardown, skipping. Caused by:', error);
     }
 
     await execa(
-      "docker-compose",
-      [...this._dockerComposeArgs, "down", "-v", "--remove-orphans"],
+      'docker-compose',
+      [...this._dockerComposeArgs, 'down', '-v', '--remove-orphans'],
       { cwd: this._dockerComposeCwd }
     );
   }

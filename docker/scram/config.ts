@@ -1,4 +1,4 @@
-const path = require("path");
+import path from 'path';
 
 function buildConnectionString(
   auth: string,
@@ -16,55 +16,55 @@ function buildConnectionString(
 export default {
   dockerCompose: {
     projectName: path.basename(__dirname),
-    yamlPath: path.resolve(__dirname, "docker-compose.yaml"),
+    yamlPath: path.resolve(__dirname, 'docker-compose.yaml'),
   },
-  waitOn: ["tcp:28006"],
+  waitOn: ['tcp:28006'],
   connections: {
     scramReadWriteAnyDatabase: {
-      connectionString: buildConnectionString("user1:password", "admin"),
+      connectionString: buildConnectionString('user1:password', 'admin'),
     },
     scramReadWriteAnyDatabaseScramSha1: {
       connectionString: buildConnectionString(
-        "user1:password",
-        "admin",
-        "SCRAM-SHA-1"
+        'user1:password',
+        'admin',
+        'SCRAM-SHA-1'
       ),
     },
     scramReadWriteAnyDatabaseScramSha256: {
       connectionString: buildConnectionString(
-        "user1:password",
-        "admin",
-        "SCRAM-SHA-256"
+        'user1:password',
+        'admin',
+        'SCRAM-SHA-256'
       ),
     },
     scramOnlyScramSha1: {
       connectionString: buildConnectionString(
-        "scramSha1:password",
-        "admin",
-        "SCRAM-SHA-1"
+        'scramSha1:password',
+        'admin',
+        'SCRAM-SHA-1'
       ),
     },
     scramOnlyScramSha256: {
       connectionString: buildConnectionString(
-        "scramSha256:password",
-        "admin",
-        "SCRAM-SHA-256"
+        'scramSha256:password',
+        'admin',
+        'SCRAM-SHA-256'
       ),
     },
     scramEncodedPassword: {
       connectionString: buildConnectionString(
-        "randomPassword:C;Ib86n5b8{AnExew[TU%XZy,)E6G!dk",
-        "admin"
+        'randomPassword:C;Ib86n5b8{AnExew[TU%XZy,)E6G!dk',
+        'admin'
       ),
     },
     scramPrivilegesOnNonExistingDatabases: {
-      connectionString: buildConnectionString("user2:password", "admin"),
+      connectionString: buildConnectionString('user2:password', 'admin'),
     },
     scramPrivilegesOnNonExistingCollections: {
-      connectionString: buildConnectionString("customRole:password", "admin"),
+      connectionString: buildConnectionString('customRole:password', 'admin'),
     },
     scramAlternateAuthDb: {
-      connectionString: buildConnectionString("authDb:password", "authDb"),
+      connectionString: buildConnectionString('authDb:password', 'authDb'),
     },
   },
 };

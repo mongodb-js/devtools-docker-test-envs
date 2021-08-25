@@ -1,28 +1,27 @@
-
 ### Srv no ssl
 
 1. disable the Umbrella roaming client, on mac os it can be done with:
 
-``` sh
+```sh
 sudo launchctl unload /Library/LaunchDaemons/com.opendns.osx.RoamingClientConfigUpdater.plist
 ```
 
 You can re-enable afterwards with:
 
-``` sh
+```sh
 sudo launchctl load /Library/LaunchDaemons/com.opendns.osx.RoamingClientConfigUpdater.p
 ```
 
 2. Start replica set and dnsmasq:
 
-``` sh
+```sh
 docker-compose -f replica-set/docker-compose.yaml up
 docker-compose -f srv-no-ssl/docker-compose.yaml up
 ```
 
 3. Add an host entry to `/etc/hosts`
 
-``` sh
+```sh
 127.0.0.1 srv-test.mongodb.dev
 ```
 
@@ -30,6 +29,6 @@ docker-compose -f srv-no-ssl/docker-compose.yaml up
 
 #### How to connect
 
-``` sh
+```sh
 mongodb+srv://root:password123@srv-test.mongodb.dev/db1?ssl=false
 ```

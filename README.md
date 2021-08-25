@@ -16,9 +16,9 @@ This README is generated from the `README.tmpl.md` and all the `README.md` in th
 
 1. Start a testing environment defined in a directory by running:
 
-  ``` sh
-  docker-compose -f docker/<directory>/docker-compose.yaml up
-  ```
+```sh
+docker-compose -f docker/<directory>/docker-compose.yaml up
+```
 
 2. Connect using the instructions specific for that testing environment as specified in the readme of each folder
 
@@ -51,7 +51,7 @@ You can either run `docker-compose up` from the subfolder containing the `docker
 
 For example this will start a sharded cluster:
 
-``` sh
+```sh
 docker-compose -f sharded/docker-compose.yaml up
 ```
 
@@ -61,16 +61,12 @@ Please also refer to the official documentation ([Getting Started](https://docs.
 
 #### Programmatically
 
-``` js
+```js
 const createTestEnvironments = require('@mongodb-js/devtools-docker-test-envs');
 
-const testEnvironments = createTestEnvironments([
-  '...',
-  'sharded',
-  '...'
-]);
+const testEnvironments = createTestEnvironments(['...', 'sharded', '...']);
 
-before(async() => {
+before(async () => {
   await testEnvironments.start();
 });
 
@@ -79,7 +75,7 @@ it('can connect to sharded cluster', () => {
   await MongoClient.connect(connectionString);
 });
 
-after(async() => {
+after(async () => {
   await testEnvironments.stop();
 });
 ```
