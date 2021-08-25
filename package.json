@@ -7,6 +7,7 @@
   "scripts": {
     "test": "mocha --timeout 60000 -r ts-node/register src/**/*.spec.ts",
     "prettier": "prettier",
+    "prelint": "npm run clean",
     "lint": "eslint . && npm run prettier -- --check .",
     "reformat": "npm run prettier -- --write .",
     "depcheck": "depcheck .",
