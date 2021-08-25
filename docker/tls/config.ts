@@ -1,6 +1,6 @@
 import path from 'path';
 
-import { default as ConnectionString } from 'mongodb-connection-string-url';
+import ConnectionString from 'mongodb-connection-string-url';
 
 const unvalidated = new ConnectionString('mongodb://localhost:27029');
 unvalidated.searchParams.set('tls', 'true');

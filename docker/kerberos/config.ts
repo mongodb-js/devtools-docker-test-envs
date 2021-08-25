@@ -1,7 +1,7 @@
 import path from 'path';
 import execa from 'execa';
 
-import { default as ConnectionString } from 'mongodb-connection-string-url';
+import ConnectionString from 'mongodb-connection-string-url';
 
 const principal = 'mongodb.user';
 const simple = new ConnectionString(
