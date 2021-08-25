@@ -3,7 +3,11 @@
 
 DevTools Team docker images and environments for testing.
 
-**NOTE: Not for production use: the content of this repo is purely for internal testing and is not supported for any other purpose.**
+## Notes
+
+ * **Not for production use:** the content of this repo is purely for internal testing and is not supported for any other purpose.
+ * Some of the test environments provided in this repository use MongoDB Enterprise Server. MongoDB Enterprise Server is licensed under [the MongoDB Customer Agreement](https://www.mongodb.com/customer-agreement). Except for evaluation purposes, you may not use MongoDB Enterprise Server without a commercial license from MongoDB.
+
 
 ##### Updating this README
 
