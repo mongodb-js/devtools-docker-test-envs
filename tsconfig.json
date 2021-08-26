@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "allowJs": false,
+    "esModuleInterop": true,
+    "downlevelIteration": true,
+    "declaration": true,
+    "forceConsistentCasingInFileNames": true,
+    "lib": ["dom", "es2018"],
+    "module": "commonjs",
+    "removeComments": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "es2018"
+  },
+  "include": ["**/*"],
+  "exclude": ["./src/**/*.spec.*", "./src/fixtures"]
+}
