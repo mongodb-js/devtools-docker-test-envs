@@ -1,16 +1,24 @@
 import path from 'path';
 
+import ConnectionString from 'mongodb-connection-string-url';
+
 function buildConnectionString(
-  auth: string,
+  username: string,
+  password: string,
   authenticationDatabase: string,
   authenticationMechanism?: string
 ) {
-  const uri = `mongodb://${auth}@localhost:28006/db1?authSource=${authenticationDatabase}`;
+  const uri = new ConnectionString('mongodb://localhost:28006/db1');
+
+  uri.username = username;
+  uri.password = password;
+  uri.searchParams.set('authSource', authenticationDatabase);
+
   if (authenticationMechanism) {
-    return `${uri}&${authenticationMechanism}`;
+    uri.searchParams.set('authMechanism', 'GSSAPI');
   }
 
-  return uri;
+  return uri.href;
 }
 
 export default {
@@ -21,50 +29,59 @@ export default {
   waitOn: ['tcp:28006'],
   connections: {
     scramReadWriteAnyDatabase: {
-      connectionString: buildConnectionString('user1:password', 'admin'),
+      connectionString: buildConnectionString('user1', 'password', 'admin'),
     },
     scramReadWriteAnyDatabaseScramSha1: {
       connectionString: buildConnectionString(
-        'user1:password',
+        'user1',
+        'password',
         'admin',
         'SCRAM-SHA-1'
       ),
     },
     scramReadWriteAnyDatabaseScramSha256: {
       connectionString: buildConnectionString(
-        'user1:password',
+        'user1',
+        'password',
         'admin',
         'SCRAM-SHA-256'
       ),
     },
     scramOnlyScramSha1: {
       connectionString: buildConnectionString(
-        'scramSha1:password',
+        'scramSha1',
+        'password',
         'admin',
         'SCRAM-SHA-1'
       ),
     },
     scramOnlyScramSha256: {
       connectionString: buildConnectionString(
-        'scramSha256:password',
+        'scramSha256',
+        'password',
         'admin',
         'SCRAM-SHA-256'
       ),
     },
     scramEncodedPassword: {
       connectionString: buildConnectionString(
-        'randomPassword:C;Ib86n5b8{AnExew[TU%XZy,)E6G!dk',
+        'randomPassword',
+        'C;Ib86n5b8{AnExew[TU%XZy,)E6G!dk',
         'admin'
       ),
     },
     scramPrivilegesOnNonExistingDatabases: {
-      connectionString: buildConnectionString('user2:password', 'admin'),
+      connectionString: buildConnectionString('user2', 'password', 'admin'),
     },
     scramPrivilegesOnNonExistingCollections: {
-      connectionString: buildConnectionString('customRole:password', 'admin'),
+      connectionString: buildConnectionString(
+        'customRole',
+        'password',
+        'admin'
+      ),
     },
     scramAlternateAuthDb: {
-      connectionString: buildConnectionString('authDb:password', 'authDb'),
+      connectionString: buildConnectionString('authDb', 'password', 'authDb'),
     },
   },
 };
