@@ -66,7 +66,7 @@ export default {
     scramEncodedPassword: {
       connectionString: buildConnectionString(
         'randomPassword',
-        'C;Ib86n5b8{AnExew[TU%XZy,)E6G!dk',
+        encodeURIComponent('C;Ib86n5b8{AnExew[TU%XZy,)E6G!dk'),
         'admin'
       ),
     },
