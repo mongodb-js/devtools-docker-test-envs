@@ -3,7 +3,7 @@ import path from 'path';
 import ConnectionString from 'mongodb-connection-string-url';
 
 const connectionString = new ConnectionString('mongodb://localhost:30017');
-connectionString.username = 'writer';
+connectionString.username = 'writer@EXAMPLE.COM';
 connectionString.password = 'Password1!';
 connectionString.searchParams.set('authMechanism', 'PLAIN');
 
