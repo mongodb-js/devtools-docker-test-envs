@@ -5,7 +5,7 @@ export default {
     projectName: path.basename(__dirname),
     yamlPath: path.resolve(__dirname, 'docker-compose.yaml'),
   },
-  waitOn: ['tcp:28006'],
+  waitOn: ['tcp:22222'],
   connections: {
     sshPassword: {
       connectionString: 'mongodb://mongo:27017',
