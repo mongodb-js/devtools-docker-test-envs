@@ -15,7 +15,7 @@ function buildConnectionString(
   uri.searchParams.set('authSource', authenticationDatabase);
 
   if (authenticationMechanism) {
-    uri.searchParams.set('authMechanism', 'GSSAPI');
+    uri.searchParams.set('authMechanism', authenticationMechanism);
   }
 
   return uri.href;
