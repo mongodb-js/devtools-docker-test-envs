@@ -3,7 +3,7 @@ import execa from 'execa';
 
 import ConnectionString from 'mongodb-connection-string-url';
 
-const principal = 'mongodb.user';
+const principal = 'mongodb.user@EXAMPLE.COM';
 const simple = new ConnectionString(
   'mongodb://mongodb-kerberos-1.example.com:29017'
 );
