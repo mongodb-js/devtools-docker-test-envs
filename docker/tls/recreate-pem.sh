@@ -31,4 +31,4 @@ openssl verify -CAfile ca.pem client.pem
 
 sleep 1
 
-rm -f *.key *.crt *.srl *.req
+rm -f server.key server.crt ca.key *.srl *.req
