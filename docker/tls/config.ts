@@ -77,7 +77,7 @@ export default {
     tlsServerAndClientValidation: {
       connectionString: serverAndClientValidation.href,
     },
-    serverAndClientValidationKeyCrt: {
+    tlsServerAndClientValidationKeyCrt: {
       connectionString: serverAndClientValidationKeyCrt.href,
       tlsCertificateFile: path.resolve(__dirname, 'tls', 'client.crt'),
     },
