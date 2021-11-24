@@ -39,6 +39,11 @@ serverAndClientValidationKeyCrt.searchParams.set(
   path.resolve(__dirname, 'tls', 'client.key')
 );
 
+serverAndClientValidationKeyCrt.searchParams.set(
+  'tlsCertificateFile',
+  path.resolve(__dirname, 'tls', 'client.crt')
+);
+
 const x509 = new ConnectionString('mongodb://localhost:27031');
 x509.searchParams.set('tls', 'true');
 x509.searchParams.set('tlsCAFile', path.resolve(__dirname, 'tls', 'ca.pem'));
@@ -79,7 +84,6 @@ export default {
     },
     tlsServerAndClientValidationKeyCrt: {
       connectionString: serverAndClientValidationKeyCrt.href,
-      tlsCertificateFile: path.resolve(__dirname, 'tls', 'client.crt'),
     },
     tlsX509: {
       connectionString: x509.href,
