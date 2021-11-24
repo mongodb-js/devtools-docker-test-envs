@@ -1,6 +1,6 @@
 {
   "name": "@mongodb-js/devtools-docker-test-envs",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "DevTools Team docker images and environments for testing",
   "main": "src/index.js",
   "types": "src/index.d.ts",
