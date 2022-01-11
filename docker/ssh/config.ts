@@ -40,7 +40,8 @@ export default {
       },
     },
     sshReplicaSetSeedlist: {
-      connectionString: 'mongodb://mongodb-rs-ssh-1:28001,mongodb-rs-ssh-2:28001,mongodb-rs-ssh-3:28001/',
+      connectionString:
+        'mongodb://mongodb-rs-ssh-1:28001,mongodb-rs-ssh-2:28001,mongodb-rs-ssh-3:28001/',
       sshTunnel: {
         host: 'localhost',
         port: 22222,
@@ -49,7 +50,8 @@ export default {
       },
     },
     sshReplicaSetByReplSetName: {
-      connectionString: 'mongodb://mongodb-rs-ssh-1:28001/?replicaSet=replicaset',
+      connectionString:
+        'mongodb://mongodb-rs-ssh-1:28001/?replicaSet=replicaset',
       sshTunnel: {
         host: 'localhost',
         port: 22222,

@@ -13,7 +13,9 @@ serverValidation.searchParams.set(
   path.resolve(__dirname, 'tls', 'ca.pem')
 );
 
-const serverValidationSsh = new ConnectionString('mongodb://mongodb-tls-server-named:27017');
+const serverValidationSsh = new ConnectionString(
+  'mongodb://mongodb-tls-server-named:27017'
+);
 serverValidationSsh.searchParams.set('tls', 'true');
 serverValidationSsh.searchParams.set(
   'tlsCAFile',
