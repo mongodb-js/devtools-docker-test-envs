@@ -22,6 +22,14 @@ openssl x509 -req -in server.req -CA ca.pem -CAkey ca.key -CAserial file.srl -ou
 cat server.key server.crt > server.pem
 openssl verify -CAfile ca.pem server.pem
 
+# two random digits number
+echo "01" > file.srl
+openssl genrsa -out server-named.key 2048
+openssl req -key server-named.key -new -out server-named.req -subj  "/C=AU/ST=NSW/O=Organisation/OU=servers/CN=mongodb-tls-server-named/emailAddress=user@domain.com"
+openssl x509 -req -in server-named.req -CA ca.pem -CAkey ca.key -CAserial file.srl -out server-named.crt -days 3650 -sha256
+cat server-named.key server-named.crt > server-named.pem
+openssl verify -CAfile ca.pem server-named.pem
+
 # 3. Make client.pem (in compass we will only use client.crt and client.key)
 openssl genrsa -out client.key 2048
 openssl req -key client.key -new -out client.req -subj "/C=AU/ST=NSW/O=Organisation/OU=clients/CN=client1/emailAddress=user@domain.com"
