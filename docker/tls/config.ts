@@ -13,6 +13,15 @@ serverValidation.searchParams.set(
   path.resolve(__dirname, 'tls', 'ca.pem')
 );
 
+const serverValidationSsh = new ConnectionString(
+  'mongodb://mongodb-tls-server-named:27017'
+);
+serverValidationSsh.searchParams.set('tls', 'true');
+serverValidationSsh.searchParams.set(
+  'tlsCAFile',
+  path.resolve(__dirname, 'tls', 'ca.pem')
+);
+
 const serverAndClientValidation = new ConnectionString(
   'mongodb://localhost:27030'
 );
@@ -66,6 +75,13 @@ x509WithSsh.searchParams.set(
 );
 x509WithSsh.searchParams.set('authMechanism', 'MONGODB-X509');
 
+const sshTunnel = {
+  host: 'localhost',
+  port: 22223,
+  username: 'root',
+  password: 'password',
+};
+
 export default {
   dockerCompose: {
     projectName: path.basename(__dirname),
@@ -79,6 +95,10 @@ export default {
     tlsServerValidation: {
       connectionString: serverValidation.href,
     },
+    tlsServerValidationSsh: {
+      connectionString: serverValidationSsh.href,
+      sshTunnel,
+    },
     tlsServerAndClientValidation: {
       connectionString: serverAndClientValidation.href,
     },
@@ -90,12 +110,7 @@ export default {
     },
     tlsX509WithSsh: {
       connectionString: x509WithSsh.href,
-      sshTunnel: {
-        host: 'localhost',
-        port: 22223,
-        username: 'root',
-        password: 'password',
-      },
+      sshTunnel,
     },
   },
 };

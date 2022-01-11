@@ -39,5 +39,25 @@ export default {
         identityKeyPassphrase: 'passphrase',
       },
     },
+    sshReplicaSetSeedlist: {
+      connectionString:
+        'mongodb://mongodb-rs-ssh-1:28001,mongodb-rs-ssh-2:28001,mongodb-rs-ssh-3:28001/',
+      sshTunnel: {
+        host: 'localhost',
+        port: 22222,
+        username: 'root',
+        password: 'password',
+      },
+    },
+    sshReplicaSetByReplSetName: {
+      connectionString:
+        'mongodb://mongodb-rs-ssh-1:28001/?replicaSet=replicaset',
+      sshTunnel: {
+        host: 'localhost',
+        port: 22222,
+        username: 'root',
+        password: 'password',
+      },
+    },
   },
 };
