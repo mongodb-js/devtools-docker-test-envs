@@ -1,0 +1,9 @@
+Runs a sharded mongodb cluster with an arbitrary version, supports RC releases
+
+```
+bash run.sh 6.0.0-rc4 28000
+```
+
+```
+mongosh --port 28000
+```
