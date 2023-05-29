@@ -11,6 +11,10 @@ Make sure you have this line in your `/etc/hosts`:
 Make sure you have this in `/etc/krb5.conf` (note the `domain_realm` section to configure cross-realm):
 
 ```conf
+[libdefaults]
+        dns_canonicalize_hostname = false
+        dns_lookup_kdc = false
+        dns_lookup_realm = false
 [realms]
         EXAMPLE.COM = {
                 kdc = localhost
