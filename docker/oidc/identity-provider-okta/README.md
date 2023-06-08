@@ -11,7 +11,7 @@ This image relies on two environment variables being set:
 When the image is built those variables are used for the `oidcIdentityProviders` configuration.
 
 ```sh
-docker-compose -f oidc-okta/docker-compose.yaml up
+docker-compose -f oidc/identity-provider-okta/docker-compose.yaml up
 ```
 
 #### How to connect
