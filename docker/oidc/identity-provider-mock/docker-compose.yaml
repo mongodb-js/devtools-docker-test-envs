@@ -1,0 +1,8 @@
+version: '3'
+services:
+  oidc-mock-provider:
+    build: ./oidc/identity-provider-mock
+  oidc-server:
+    build: ./oidc/identity-provider-mock/mock-provider
+    ports:
+      - '27096:27017'

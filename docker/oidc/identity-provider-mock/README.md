@@ -5,7 +5,7 @@ Uses the mock OIDC provider from the [oidc-mock-provider](https://github.com/mon
 #### Startup
 
 ```sh
-docker-compose -f oidc-mock-provider/docker-compose.yaml up
+docker-compose -f oidc/identity-provider-mock/docker-compose.yaml up
 ```
 
 #### How to connect
@@ -20,5 +20,5 @@ mongosh \
 Connection string:
 
 ```
-mongodb://localhost:27095/?authMechanism=MONGODB-OIDC
+mongodb://localhost:27096/?authMechanism=MONGODB-OIDC
 ```

@@ -2,7 +2,7 @@
 
 docker-compose -f docker/enterprise/docker-compose.yaml up -d --force-recreate
 docker-compose -f docker/ldap/docker-compose.yaml up -d --force-recreate
-docker-compose -f docker/oidc-mock-provider/docker-compose.yaml ps -d --force-recreate
+docker-compose -f docker/oidc/identity-provider-mock/docker-compose.yaml ps -d --force-recreate
 docker-compose -f docker/scram/docker-compose.yaml up -d --force-recreate
 docker-compose -f docker/sharded/docker-compose.yaml up -d --force-recreate
 docker-compose -f docker/ssh/docker-compose.yaml up -d --force-recreate

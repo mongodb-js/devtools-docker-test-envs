@@ -6,7 +6,7 @@ import community from '../docker/community/config';
 import enterprise from '../docker/enterprise/config';
 import kerberos from '../docker/kerberos/config';
 import ldap from '../docker/ldap/config';
-import oidc from '../docker/oidc-mock-provider/config';
+import oidc from '../docker/oidc/identity-provider-mock/config';
 import replicaSet from '../docker/replica-set/config';
 import scram from '../docker/scram/config';
 import sharded from '../docker/sharded/config';
