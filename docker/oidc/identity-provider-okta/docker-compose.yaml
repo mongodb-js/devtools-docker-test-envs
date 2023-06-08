@@ -1,0 +1,9 @@
+version: '3'
+services:
+  mongodb-server-with-oidc-auth:
+    build: ./oidc/identity-provider-okta
+    environment:
+      OKTA_CLIENT_ID: ${OKTA_CLIENT_ID}
+      OKTA_ISSUER: ${OKTA_ISSUER}
+    ports:
+      - '27095:27017'
