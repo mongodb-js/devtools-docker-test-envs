@@ -17,4 +17,5 @@ COPY etc/mongod.conf /etc/mongod.conf
 RUN mkdir /db
 
 CMD mongodb/bin/mongod --config /etc/mongod.conf \
-  --setParameter oidcIdentityProviders="[{'clientId':'testServer','issuer':'${OKTA_ISSUER}','authorizationClaim':'groups','audience':'resource-server-audience-value','authNamePrefix':'dev'}]"
+  --setParameter enableTestCommands=true \
+  --setParameter oidcIdentityProviders="[{'clientId':'testServer','issuer':'http://localhost:28200','requestScopes':['mongodbGroups'],'authorizationClaim':'groups','audience':'resource-server-audience-value','authNamePrefix':'dev'}]"

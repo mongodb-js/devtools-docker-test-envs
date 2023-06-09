@@ -1,8 +1,13 @@
 version: '3'
 services:
-  oidc-mock-provider:
+  oidc-mock-identity-provider-server:
+    build: ./oidc/identity-provider-mock/mock-provider-server
+    ports:
+      - '28200:28200'
+
+  oidc-mongodb-server:
     build: ./oidc/identity-provider-mock
-  oidc-server:
-    build: ./oidc/identity-provider-mock/mock-provider
+    depends_on:
+      - oidc-mock-identity-provider-server
     ports:
       - '27096:27017'

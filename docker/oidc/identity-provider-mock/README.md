@@ -2,6 +2,8 @@
 
 Uses the mock OIDC provider from the [oidc-mock-provider](https://github.com/mongodb-js/devtools-shared/tree/main/packages/oidc-mock-provider) package.
 
+The mock OIDC provider server runs on port 28200.
+
 #### Startup
 
 ```sh
