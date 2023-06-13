@@ -22,11 +22,13 @@ async function run() {
     overrideRequestHandler() {
       return () => {};
     },
-    port
+    port,
   };
   await OIDCMockProvider.create(oidcMockProviderConfig);
 
-  console.log(`Started OIDC mock identity provider server. Listening on port ${port}.`);
+  console.log(
+    `Started OIDC mock identity provider server. Listening on port ${port}.`
+  );
 }
 
 run();
