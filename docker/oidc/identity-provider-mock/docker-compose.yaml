@@ -4,10 +4,16 @@ services:
     build: ./oidc/identity-provider-mock/mock-provider-server
     ports:
       - '28200:28200'
-
+    healthcheck:
+      # When the mock identity provider server starts it emits 404.
+      test: curl -I http://localhost:28200 | grep 404 || exit 1
+      interval: 1s
+      retries: 5
+      start_period: 1s
+      timeout: 10s
   oidc-mongodb-server:
     build: ./oidc/identity-provider-mock
     depends_on:
-      - oidc-mock-identity-provider-server
-    ports:
-      - '27096:27017'
+      oidc-mock-identity-provider-server:
+        condition: service_healthy
+    network_mode: host
