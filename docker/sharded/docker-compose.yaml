@@ -2,7 +2,8 @@ version: '2'
 
 services:
   mongodb-sharded:
-    image: 'docker.io/bitnami/mongodb-sharded'
+    # TODO: https://jira.mongodb.org/browse/COMPASS-7265
+    image: 'docker.io/bitnami/mongodb-sharded:6.0.10'
     environment:
       - MONGODB_ADVERTISED_HOSTNAME=mongodb-sharded
       - MONGODB_SHARDING_MODE=mongos
@@ -14,7 +15,8 @@ services:
       - '28004:27017'
 
   mongodb-shard0:
-    image: 'docker.io/bitnami/mongodb-sharded'
+    # TODO: https://jira.mongodb.org/browse/COMPASS-7265
+    image: 'docker.io/bitnami/mongodb-sharded:6.0.10'
     environment:
       - MONGODB_ADVERTISED_HOSTNAME=mongodb-shard0
       - MONGODB_SHARDING_MODE=shardsvr
@@ -25,7 +27,8 @@ services:
       - MONGODB_REPLICA_SET_NAME=shard0
 
   mongodb-cfg:
-    image: 'docker.io/bitnami/mongodb-sharded'
+    # TODO: https://jira.mongodb.org/browse/COMPASS-7265
+    image: 'docker.io/bitnami/mongodb-sharded:6.0.10'
     environment:
       - MONGODB_ADVERTISED_HOSTNAME=mongodb-cfg
       - MONGODB_SHARDING_MODE=configsvr
