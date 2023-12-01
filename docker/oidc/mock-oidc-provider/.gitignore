@@ -1,1 +1,2 @@
-!*.js
+!proxy.js
+!oidc-mock-provider.js
