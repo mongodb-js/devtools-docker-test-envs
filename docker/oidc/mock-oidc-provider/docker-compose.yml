@@ -1,7 +1,0 @@
-version: '3'
-services:
-  mongodb-server-with-mock-oidc-provider:
-    build: .
-    ports:
-      - '27017:27017'
-      - '29091:29091'

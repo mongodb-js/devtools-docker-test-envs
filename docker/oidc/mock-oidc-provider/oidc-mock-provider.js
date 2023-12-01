@@ -1,12 +1,16 @@
 const { OIDCMockProvider } = require('@mongodb-js/oidc-mock-provider');
 
 const DEFAULT_TOKEN_PAYLOAD = {
-  expires_in: 3600,
+  expires_in: process.env.OIDC_TOKEN_PAYLOAD_EXPIRES_IN
+    ? Number(process.env.OIDC_TOKEN_PAYLOAD_EXPIRES_IN)
+    : 3600,
   payload: {
     // Define the user information stored inside the access tokens.
-    groups: ['testgroup'],
-    sub: 'testuser',
-    aud: 'resource-server-audience-value',
+    groups: process.env.OIDC_TOKEN_PAYLOAD_GROUPS
+      ? process.env.OIDC_TOKEN_PAYLOAD_GROUPS.split(',')
+      : ['testgroup'],
+    sub: process.env.OIDC_TOKEN_PAYLOAD_SUB || 'testuser',
+    aud: process.env.OIDC_TOKEN_PAYLOAD_AUD || 'resource-server-audience-value',
   },
 };
 
