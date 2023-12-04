@@ -11,6 +11,7 @@ import scram from '../docker/scram/config';
 import sharded from '../docker/sharded/config';
 import ssh from '../docker/ssh/config';
 import tls from '../docker/tls/config';
+import oidc from '../docker/oidc/mock-oidc-provider/config';
 
 const CONFIGS: Record<string, TestEnvironmentConfiguration> = {
   community,
@@ -22,6 +23,7 @@ const CONFIGS: Record<string, TestEnvironmentConfiguration> = {
   sharded,
   ssh,
   tls,
+  oidc,
 };
 
 export default function createTestEnvironments(
