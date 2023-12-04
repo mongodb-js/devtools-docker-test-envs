@@ -7,3 +7,4 @@ docker-compose -f docker/sharded/docker-compose.yaml down --remove-orphans --vol
 docker-compose -f docker/ssh/docker-compose.yaml down --remove-orphans --volumes
 docker-compose -f docker/tls/docker-compose.yaml down --remove-orphans --volumes
 docker-compose -f docker/kerberos/docker-compose.yaml down --remove-orphans --volumes
+docker-compose -f docker/oidc/mock-oidc-provider/docker-compose.yaml down --remove-orphans --volumes

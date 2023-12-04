@@ -9,12 +9,12 @@ docker-compose -f oidc/mock-oidc-provider/docker-compose.yaml up
 ```sh
 mongosh \
   --host localhost \
-  --port 27017 \
+  --port 27096 \
   --authenticationMechanism MONGODB-OIDC
 ```
 
 Connection string:
 
 ```
-mongodb://localhost:27017/?authMechanism=MONGODB-OIDC
+mongodb://localhost:27096/?authMechanism=MONGODB-OIDC
 ```

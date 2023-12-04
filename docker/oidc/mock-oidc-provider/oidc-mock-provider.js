@@ -17,24 +17,39 @@ const DEFAULT_TOKEN_PAYLOAD = {
 (async () => {
   const port = process.argv[2];
   const proxyPort = process.argv[3];
+  const serverOidcConfig = {
+    get issuer() {
+      return provider.issuer;
+    },
+    clientId: 'testServer',
+    requestScopes: ['mongodbGroups'],
+    authorizationClaim: 'groups',
+    audience: 'resource-server-audience-value',
+    authNamePrefix: 'dev',
+  };
   const provider = await OIDCMockProvider.create({
     port: Number(port),
     getTokenPayload() {
       return DEFAULT_TOKEN_PAYLOAD;
     },
-    overrideRequestHandler(_url, req) {
+    overrideRequestHandler(_url, req, res) {
       console.log('[OIDC PROVIDER] %s %s', req.method, req.url);
+      if (req.url === '/server-oidc-config') {
+        res.setHeader('content-type', 'application/json');
+        res.write(JSON.stringify(serverOidcConfig));
+        res.end();
+      }
     },
   });
   console.log('[OIDC PROVIDER] Listening on %s', provider.issuer);
-  // To make oidc-mock-provider can be used by the server, we need to make sure
-  // that it's listening on the localhost and the issuer returned by the various
-  // mock provider requests is matching for all parts of the OIDC flow.
+  // To make sure oidc-mock-provider can be used by the server, we need to make
+  // sure that it's listening on the localhost and the issuer returned by the
+  // various mock provider requests is matching for all parts of the OIDC flow.
   //
   // This is tricky in docker environment on macos where we can't run the
   // container attached to the host network. We can't use docker hostnames
-  // either because then we will not be passing various http localhost checks
-  // in server or oidc-plugin.
+  // either because then we will not be passing various http localhost checks in
+  // server or oidc-plugin.
   //
   // To work around that we set up a proxy (see `./proxy.js`) that actually
   // listens on all interfaces (0.0.0.0), while mock provider is only listening

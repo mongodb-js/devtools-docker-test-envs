@@ -3,7 +3,7 @@ services:
   mongodb-server-with-mock-oidc-provider:
     build: .
     ports:
-      - '27017:27017'
+      - '27096:27017'
       - '29091:29091'
     environment:
       - OIDC_TOKEN_PAYLOAD_EXPIRES_IN

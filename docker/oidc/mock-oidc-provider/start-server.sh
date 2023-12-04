@@ -9,5 +9,9 @@ until $(curl --output /dev/null --silent --head --fail http://localhost:$OIDC_PR
     sleep 0.3
 done
 echo Starting server
+OIDC_IDENTITY_PROVIDERS="[$(curl --fail http://localhost:29091/server-oidc-config)]"
 # This is original mongodb/mongodb-enterprise-server entrypoint
-python3 /usr/local/bin/docker-entrypoint.py --setParameter authenticationMechanisms="SCRAM-SHA-256,MONGODB-OIDC" --setParameter enableTestCommands="true" --setParameter oidcIdentityProviders="[{\"issuer\":\"http://localhost:$OIDC_PROVIDER_PROXY_PORT\",\"clientId\":\"testServer\",\"requestScopes\":[\"mongodbGroups\"],\"authorizationClaim\":\"groups\",\"audience\":\"resource-server-audience-value\",\"authNamePrefix\":\"dev\"}]"
+python3 /usr/local/bin/docker-entrypoint.py \
+    --setParameter authenticationMechanisms="SCRAM-SHA-256,MONGODB-OIDC" \
+    --setParameter enableTestCommands="true" \
+    --setParameter oidcIdentityProviders="$OIDC_IDENTITY_PROVIDERS"
