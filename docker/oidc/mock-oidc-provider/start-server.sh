@@ -16,10 +16,8 @@ python3 /usr/local/bin/docker-entrypoint.py \
     --setParameter authenticationMechanisms="MONGODB-OIDC" \
     --setParameter enableTestCommands="true" \
     --setParameter oidcIdentityProviders="$OIDC_IDENTITY_PROVIDERS" > /dev/null &
-MDB_PID="$!"
 
 # Wait for the mongodb server to start.
-# sleep 5
 until nc -z localhost 27017; do
     sleep 1
 done
@@ -28,13 +26,9 @@ done
 mongosh "mongodb://localhost:27017/admin" --eval "JSON.stringify(db.createRole({ role: \"dev/groups\", privileges: [ ], roles: [ \"dbOwner\" ] }));"
 
 # Stop the no auth database (we re-start it with auth enabled next).
-echo Stopping no-auth server pid $MDB_PID
-kill $MDB_PID
-
 pkill mongod
 
 # Wait for the mongodb server to shut down.
-# sleep 15
 until ! nc -z localhost 27017; do
     sleep 1
 done
