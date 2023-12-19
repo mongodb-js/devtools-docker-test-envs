@@ -2,7 +2,8 @@ FROM mongodb/mongodb-enterprise-server:latest
 USER root
 RUN apt-get update && apt-get install -y \
     ca-certificates \
-    curl
+    curl jq netcat
+ARG TARGETARCH
 ARG NODE_VERSION=20.10.0
 ARG NODE_PACKAGE=node-v$NODE_VERSION-linux-arm64
 ARG NODE_HOME=/opt/$NODE_PACKAGE
