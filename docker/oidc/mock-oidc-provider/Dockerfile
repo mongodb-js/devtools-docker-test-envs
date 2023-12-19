@@ -11,8 +11,6 @@ ENV NODE_PATH $NODE_HOME/lib/node_modules
 ENV PATH $NODE_HOME/bin:$PATH
 RUN curl https://nodejs.org/dist/v$NODE_VERSION/$NODE_PACKAGE.tar.gz | tar -xzC /opt/
 RUN mkdir -p /tmp/mock-provider && cd /tmp/mock-provider && npm init -y && npm install @mongodb-js/oidc-mock-provider
-COPY install-mongosh.sh /install-mongosh.sh
-RUN bash install-mongosh.sh
 COPY start-server.sh /start-server.sh
 COPY oidc-mock-provider.js /tmp/mock-provider/oidc-mock-provider.js
 COPY proxy.js /tmp/mock-provider/proxy.js

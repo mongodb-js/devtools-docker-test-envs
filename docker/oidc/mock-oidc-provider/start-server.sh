@@ -21,9 +21,8 @@ python3 /usr/local/bin/docker-entrypoint.py \
 until nc -z localhost 27017; do
     sleep 1
 done
-
 # Creates the OIDC user role in the database.
-mongosh "mongodb://localhost:27017/admin" --eval "JSON.stringify(db.createRole({ role: \"dev/groups\", privileges: [ ], roles: [ \"dbOwner\" ] }));"
+mongosh "mongodb://localhost:27017/admin" --json --eval "(process.env.OIDC_TOKEN_PAYLOAD_GROUPS ?? 'testgroup').split(',').map(group => db.createRole({ role: 'dev/' + group, privileges: [ ], roles: [ \"readWriteAnyDatabase\" ] }));"
 
 # Stop the no auth database (we re-start it with auth enabled next).
 pkill mongod
