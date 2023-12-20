@@ -61,7 +61,7 @@ function generateConnections() {
 
 async function writeConnections() {
   const data = generateConnections();
-  fs.writeFile(FILE_PATH, JSON.stringify(data, null, 2));
+  await fs.writeFile(FILE_PATH, JSON.stringify(data, null, 2));
 }
 
 /**
