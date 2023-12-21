@@ -193,4 +193,9 @@ lib
 **/*.js.map
 !**/initdb/*.js
 !.eslintrc.js
+!scripts/generate-connections.js
 *.tgz
+
+
+# Ignore the generated connections
+compass-connections.json
