@@ -3,7 +3,7 @@ const { v4 } = require('uuid');
 const path = require('path');
 const fs = require('fs/promises');
 
-const FILE_PATH = path.resolve(__dirname, '..', 'compass-connections.json');
+const FILE_PATH = path.resolve(process.cwd(), 'compass-connections.json');
 const connectionsWithVariants = {
   enterprise: ['enterprise'],
   ldap: ['ldap'],
