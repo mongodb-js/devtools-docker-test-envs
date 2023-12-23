@@ -22,7 +22,7 @@ until nc -z localhost 27017; do
     sleep 1
 done
 # Creates the OIDC user role in the database.
-mongosh "mongodb://localhost:27017/admin" --json --eval "(process.env.OIDC_TOKEN_PAYLOAD_GROUPS ?? 'testgroup').split(',').map(group => db.createRole({ role: 'dev/' + group, privileges: [ ], roles: [ \"readWriteAnyDatabase\" ] }));"
+mongosh "mongodb://localhost:27017/admin" --json --eval "try {(process.env.OIDC_TOKEN_PAYLOAD_GROUPS ?? 'testgroup').split(',').map(group => db.createRole({ role: 'dev/' + group, privileges: [ ], roles: [ \"readWriteAnyDatabase\" ] })); } catch (err) { /* The user likely already exists. */ if (!err.message.includes('already exists')) { throw err; } }"
 
 # Stop the no auth database (we re-start it with auth enabled next).
 pkill mongod
