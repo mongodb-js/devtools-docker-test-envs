@@ -6,10 +6,9 @@ services:
   mongodb:
     image: devtools-mongodb-enterprise:${MONGODB_VERSION:-4.4}
     build:
-      context: '../enterprise/${MONGODB_VERSION:-4.4}'
+      context: '../enterprise'
       args:
-        MONGO_PACKAGE: 'mongodb-enterprise'
-        MONGO_REPO: repo.mongodb.com
+        MONGODB_VERSION: ${MONGODB_VERSION:-4.4}
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: root
