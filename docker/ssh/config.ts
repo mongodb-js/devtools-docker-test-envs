@@ -41,7 +41,7 @@ export default {
     },
     sshReplicaSetSeedlist: {
       connectionString:
-        'mongodb://mongodb-rs-ssh-1:28001,mongodb-rs-ssh-2:28001,mongodb-rs-ssh-3:28001/',
+        'mongodb://mongodb-rs-ssh-1:28001,mongodb-rs-ssh-2:28002,mongodb-rs-ssh-3:28003/',
       sshTunnel: {
         host: 'localhost',
         port: 22222,
