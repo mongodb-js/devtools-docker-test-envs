@@ -69,8 +69,6 @@ RUN set -ex; \
 
 RUN mkdir /docker-entrypoint-initdb.d
 
-
-
 ENV GPG_KEYS E162F504A20CDF15827F718D4B7C549A058F8B6B
 RUN set -ex; \
  	# pull from pgp.mongodb.com rather than a keyserver which is not supported.
@@ -85,7 +83,6 @@ RUN set -ex; \
 	command -v gpgconf && gpgconf --kill all || :; \
 	rm -r "$GNUPGHOME"; \
 	apt-key list
-
 
 # Allow build-time overrides (eg. to build image with MongoDB Enterprise version)
 # Options for MONGO_PACKAGE: mongodb-org OR mongodb-enterprise
