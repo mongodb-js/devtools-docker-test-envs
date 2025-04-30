@@ -71,10 +71,10 @@ RUN mkdir /docker-entrypoint-initdb.d
 
 ENV GPG_KEYS E162F504A20CDF15827F718D4B7C549A058F8B6B
 RUN set -ex; \
-	apt-get install -y --no-install-recommends wget \
+	apt-get install -y --no-install-recommends wget; \
  	# pull from pgp.mongodb.com rather than a keyserver which is not supported.
 	# (although apt-key is deprecated on newer ubuntu/debian.)
-	wget -qO - https://pgp.mongodb.com/server-4.2.asc | apt-key add - \
+	wget -qO - https://pgp.mongodb.com/server-4.2.asc | apt-key add -; \
 	export GNUPGHOME="$(mktemp -d)"; \
 	echo "disable-ipv6" >> "${GNUPGHOME}/dirmngr.conf"; \
 	for key in $GPG_KEYS; do \

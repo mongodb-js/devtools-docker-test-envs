@@ -74,10 +74,10 @@ RUN set -ex; \
 RUN mkdir /docker-entrypoint-initdb.d
 
 RUN set -ex; \
-	apt-get install -y --no-install-recommends wget \
+	apt-get install -y --no-install-recommends wget; \
   # pull from pgp.mongodb.com rather than a keyserver which is not supported.
 	# (although apt-key is deprecated on newer ubuntu/debian.)
-	wget -qO - https://pgp.mongodb.com/server-5.0.asc | apt-key add - \
+	wget -qO - https://pgp.mongodb.com/server-5.0.asc | apt-key add -; \
 	export GNUPGHOME="$(mktemp -d)"; \
 	set -- 'F5679A222C647C87527C2F8CB00A0BD1E2C63C11'; \
 	for key; do \
