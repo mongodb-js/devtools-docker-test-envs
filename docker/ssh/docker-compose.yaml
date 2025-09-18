@@ -3,7 +3,7 @@ services:
   mongo:
     image: mongo
   'mongodb-rs-ssh-1':
-    image: 'docker.io/bitnami/mongodb'
+    image: 'docker.io/bitnamilegacy/mongodb'
     environment:
       MONGODB_ADVERTISED_HOSTNAME: 'mongodb-rs-ssh-1'
       MONGODB_REPLICA_SET_MODE: 'primary'
@@ -11,7 +11,7 @@ services:
       MONGODB_REPLICA_SET_KEY: 'replicasetkey123'
       MONGODB_PORT_NUMBER: '28001'
   'mongodb-rs-ssh-2':
-    image: 'docker.io/bitnami/mongodb'
+    image: 'docker.io/bitnamilegacy/mongodb'
     environment:
       MONGODB_ADVERTISED_HOSTNAME: 'mongodb-rs-ssh-2'
       MONGODB_REPLICA_SET_MODE: 'secondary'
@@ -21,7 +21,7 @@ services:
       MONGODB_INITIAL_PRIMARY_PORT_NUMBER: '28001'
       MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD: 'password123'
   'mongodb-rs-ssh-3':
-    image: 'docker.io/bitnami/mongodb'
+    image: 'docker.io/bitnamilegacy/mongodb'
     environment:
       MONGODB_ADVERTISED_HOSTNAME: 'mongodb-rs-ssh-3'
       MONGODB_REPLICA_SET_MODE: 'secondary'
