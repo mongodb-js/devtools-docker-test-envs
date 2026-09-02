@@ -46,7 +46,7 @@ export default class TestEnvironment {
       await setHostEntry('127.0.0.1', host);
     }
 
-    await execa('docker-compose', args, {
+    await execa('docker', ['compose', ...args], {
       cwd: this._dockerComposeCwd,
       stdio: 'inherit',
     });
@@ -80,8 +80,8 @@ export default class TestEnvironment {
     }
 
     await execa(
-      'docker-compose',
-      [...this._dockerComposeArgs, 'down', '-v', '--remove-orphans'],
+      'docker',
+      ['compose', ...this._dockerComposeArgs, 'down', '-v', '--remove-orphans'],
       { cwd: this._dockerComposeCwd }
     );
   }
