@@ -39,7 +39,7 @@ services:
       - '28003:28003'
 
   'setup':
-    image: mongo
+    image: 'mongo:${MONGODB_VERSION:-8.2}'
     depends_on:
       - mongodb-rs-1
       - mongodb-rs-2

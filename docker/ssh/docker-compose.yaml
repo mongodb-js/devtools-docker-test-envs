@@ -1,7 +1,7 @@
 version: '3'
 services:
   mongo:
-    image: mongo
+    image: 'mongo:${MONGODB_VERSION:-8.2}'
   'mongodb-rs-ssh-1':
     image: 'docker.io/bitnamilegacy/mongodb'
     environment:
